@@ -1,0 +1,89 @@
+{% extends 'layouts/administration/administration_base.html' %}
+{% load static %}
+
+
+{% block content %}
+
+<section class="content">
+    <h1>بخش مدیریت دسته ها</h1>
+    <hr/>
+    {% if categories %}
+    <div class="box">
+        <div class="box-header">
+          <h3 class="box-title">لیست دسته ها</h3>
+
+          <form class="box-tools">
+            <div class="input-group input-group-sm" style="width: 150px;">
+              <input type="text" name="search" class="form-control pull-right" placeholder="جستجو" value="{{search}}">
+
+              <div class="input-group-btn">
+                <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+              </div>
+            </div>
+          </form>
+        </div>
+        <!-- /.box-header -->
+        <div class="box-body table-responsive no-padding">
+            <table class="table table-hover">
+                <tbody>
+                    <tr>
+                        <th>نام دسته</th>
+                        <th>زیردسته ها</th>
+                        <th>دستورات</th>
+                    </tr>
+                    {% for category in categories %}
+                    <tr>
+                        <td>
+                            {{category.category_name}}
+                        </td>
+                        <td>
+                            <ul>
+                                {% for sub_category in category.sub_categories.all %}
+                                <li>{{sub_category.sub_category_name}}</li>
+                                {% endfor %}
+                            </ul>
+                        </td>
+                        <td>
+                            <a class="btn btn-warning" href="" title="ویرایش">
+                                <i class="fa fa-pencil" aria-hidden="true"></i>
+                            </a>
+                            <a class="btn btn-danger" href="" title="حذف">
+                                <i class="fa fa-trash" aria-hidden="true"></i>
+                            </a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+      </div>
+    <div class="text-center">
+
+        <br/>
+        <div class="box-tools">
+            <ul class="pagination pagination-sm no-margin ">
+                {% if has_previous %}
+                    <li class="paginate_button"><a href="{{request.path}}?page={{current_page|add:-1}}&search={{search}}"> &lt;&lt;</a></li>
+                {% endif %}
+                {% for page in page_range %}
+                    {% if page == current_page %}
+                        <li class="paginate_button active"><a>{{page}}</a></li>
+                    {% else %}
+                        <li class="paginate_button"><a href="{{request.path}}?page={{page}}&search={{search}}">{{page}}</a></li>
+                    {% endif %}
+                {% endfor %}
+                {% if has_next %}
+                    <li class="paginate_button"><a href="{{request.path}}?page={{current_page|add:1}}&search={{search}}">>></a></li>
+                {% endif %}
+            </ul>
+          </div>
+            
+    </div>
+    {% else %}
+        <div class="alert alert-warning">دسته ای وجود ندارد
+            <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+        </div>
+    {% endif %}
+</section>
+
+{% endblock %}

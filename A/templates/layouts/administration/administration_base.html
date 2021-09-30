@@ -1,0 +1,23 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  {% include 'layouts/administration/includes/head.html' %}
+  {% block styles %}{% endblock %}
+</head>
+<body class="hold-transition skin-blue sidebar-mini">
+<div class="wrapper">
+
+{% include 'layouts/administration/includes/header.html' %}
+
+{% include 'layouts/administration/includes/side.html' %} 
+  <div class="content-wrapper">
+{% include 'layouts/administration/includes/content-header.html' %} 
+    {% block content %}{% endblock %}
+  </div>
+</div>
+
+{% include 'layouts/administration/includes/scripts.html' %} 
+
+</body>
+</html>

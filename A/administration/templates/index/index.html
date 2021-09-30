@@ -1,0 +1,150 @@
+{% extends 'layouts/administration/administration_base.html' %}
+
+
+
+{% block content %}
+<section class="content">
+    <div class="row">
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-aqua">
+            <div class="inner">
+              <h3>150</h3>
+
+              <p>سفارش جدید</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-bag"></i>
+            </div>
+          </div>
+        </div>
+        <!-- ./col -->
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-green">
+            <div class="inner">
+              <h3>53<sup style="font-size: 20px">%</sup></h3>
+
+              <p>افزایش امتیاز</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-stats-bars"></i>
+            </div>
+          </div>
+        </div>
+        <!-- ./col -->
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-yellow">
+            <div class="inner">
+              <h3>{{user_count}}</h3>
+
+              <p>کاربران ثبت شده</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-person-add"></i>
+            </div>
+          </div>
+        </div>
+        <!-- ./col -->
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-red">
+            <div class="inner">
+              <h3>65</h3>
+
+              <p>بازدید جدید</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-pie-graph"></i>
+            </div>
+          </div>
+        </div>
+        <!-- ./col -->
+      </div>
+
+
+      <div class="row">
+        <section class="col-lg-12 col-md-12">
+          <div class="box box-info">
+            <div class="box-header">
+              <i class="fa fa-info-circle"></i>
+              <h3 class="box-title">راهنمای پنل مدیریت </h3>
+              <!-- tools box -->
+              <div class="pull-left box-tools">
+                <button type="button" class="btn bg-info btn-sm" data-widget="collapse"><i class="fa fa-minus"></i>
+                </button>
+              </div>
+              <!-- /. tools -->
+            </div>
+            <div class="box-body">
+
+                <h5>
+                    در بخش مدیریت کاربران شما میتوانید کابران را مدیریت کنید 
+                </h5>
+                <h6>گزینه ها : </h6>
+                <ul>
+                    <li>دیدن کابران</li>
+                    <li>ویرایش کاربر</li>
+                    <li>حذف کاربر</li>
+                </ul>
+                <hr/>
+
+                <h5>
+                 در بخش مدیریت نقش شما میتوانید نقش کاربران را مشخص کنید و به کابران دسترسی بدهید
+                </h5>
+                <h6>گزینه ها : </h6>
+                <ul>
+                    <li>دیدن نقش ها</li>
+                    <li>افزودن نقش</li>
+                    <li>ویرایش نقش</li>
+                    <li>حذف نقش</li>
+                </ul>
+                <hr/>
+
+                <h5>
+                    در بخش مدیریت دسته ها شما میتوانید تخصص دکتر هارا مدیریت کنید و در مدیریت کابران به دکتر ها اضافه کنید
+                </h5>
+                   <h6>گزینه ها : </h6>
+                   <ul>
+                       <li>دیدن دسته ها</li>
+                       <li>افزودن دسته</li>
+                       <li>ویرایش دسته</li>
+                       <li>حذف دسته</li>
+                   </ul>
+                <hr/>
+
+                <h5>
+                    در بخش مدیریت عکس ها شما میتوانید عکس های وبسایت را مدیریت کنید
+                </h5>
+                   <h6>گزینه ها : </h6>
+                   <ul>
+                       <li>دیدن عکس ها</li>
+                       <li>افزودن عکس</li>
+                       <li>ویرایش عکس</li>
+                       <li>حذف عکس</li>
+                   </ul>
+                <hr/>
+
+                <h5>
+                    در بخش ویرایش تنظیمات سایت شما میتوانید تنظیمات سایت را ویرایش کنید
+                </h5>
+                   <h6>گزینه ها : </h6>
+                   <ul>
+                       <li>ویرایش صفحه ارتباط با ما</li>
+                       <li>ویرایش صفحه درباره ما</li>
+                   </ul>
+                <hr/>
+                
+            </div>
+          </div>
+        </section>
+      </div>
+
+
+
+</section>
+
+
+
+{% endblock %}

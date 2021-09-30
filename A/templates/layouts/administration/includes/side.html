@@ -1,0 +1,96 @@
+{% load static %}
+
+<aside class="main-sidebar">
+    <!-- sidebar: style can be found in sidebar.less -->
+    <section class="sidebar">
+      <!-- Sidebar user panel -->
+      {% if request.user.name and request.user.family and request.user.profile_img %}
+      <div class="user-panel">
+        <div class="pull-right image">
+          <img src="{{request.user.profile_img.url}}" class="img-circle" alt="User Image">
+        </div>
+        <div class="pull-right info">
+          <p>{{request.user.name}} {{request.user.family}}</p>
+          <a href="#"><i class="fa fa-circle text-success"></i> آنلاین</a>
+        </div>
+      </div>
+      {% endif %}
+      <ul class="sidebar-menu" data-widget="tree">
+        <li class="header">منو</li>
+
+        {% if can_see_users %}
+          <li class="active treeview">
+            <a href="">
+              <i class="fa fa-users"></i> <span>مدیریت کاربران</span>
+            </a>
+            <ul class="treeview-menu">
+              {% if can_see_users %}
+                <li><a href="{% url 'administration:user-management' %}"><i class="fa fa-circle-o"></i> دیدن کاربران</a></li>
+              {% endif %}
+            </ul>
+          </li>
+        {% endif %}
+
+        {% if can_see_roles or can_add_role %}
+          <li class="active treeview">
+            <a href="">
+              <i class="fa fa-tags"></i> <span>مدیریت نقش ها</span>
+            </a>
+            <ul class="treeview-menu">
+              {% if can_see_roles %}
+                <li><a href="{% url 'administration:role-management' %}"><i class="fa fa-circle-o"></i> دیدن نقش ها</a></li>
+              {% endif %}
+              {% if can_add_role %}
+                <li><a href="{% url 'administration:add-role' %}"><i class="fa fa-circle-o"></i> افزودن نقش جدید</a></li>
+              {% endif %}
+            </ul>
+          </li>
+        {% endif %}
+
+        {% if can_see_categories or can_add_category %}  
+          <li class="active treeview">
+            <a href="">
+              <i class="fa fa-th-large"></i> <span>مدیریت دسته ها</span>
+            </a>
+            <ul class="treeview-menu">
+              {% if can_see_categories %}
+                <li><a href="{% url 'administration:category-management' %}"><i class="fa fa-circle-o"></i> دیدن دسته ها</a></li>
+              {% endif %}
+              {% if can_add_category %}
+                <li><a href="{% url 'administration:add-category' %}"><i class="fa fa-circle-o"></i> افزودن دسته جدید</a></li>
+              {% endif %}
+            </ul>
+          </li>
+        {% endif %}
+
+        {% if can_see_pictures or can_add_picture %}
+          <li class="active treeview">
+            <a href="">
+              <i class="fa fa-files-o"></i> <span>مدیریت عکس ها</span>
+            </a>
+            <ul class="treeview-menu">
+              {% if can_see_pictures %}
+              <li><a href="{% url 'administration:picture-management' %}"><i class="fa fa-circle-o"></i> دیدن عکس ها</a></li>
+              {% endif %}
+              {% if can_add_picture %}
+              <li><a href="{% url 'administration:add-picture' %}"><i class="fa fa-circle-o"></i> افزودن عکس جدید</a></li>
+              {% endif %}
+            </ul>
+          </li>
+        {% endif %}
+
+        {% if can_edit_site_settings %}
+        <li class="active treeview">
+          <a href="">
+            <i class="fa fa-cogs"></i> <span>تنظیمات سایت</span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="{% url 'administration:edit-site-settings' %}"><i class="fa fa-circle-o"></i> ویرایش تنظیمات</a></li>
+          </ul>
+        </li>
+        {% endif %}
+
+      </ul>
+    </section>
+    <!-- /.sidebar -->
+  </aside>
