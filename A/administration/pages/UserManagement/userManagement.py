@@ -44,3 +44,4 @@ class UserManagement(View):
             "search":search,
             "page_range":range(min_page,max_page + 1),
         })
+

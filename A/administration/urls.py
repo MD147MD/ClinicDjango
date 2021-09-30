@@ -6,6 +6,7 @@ app_name = 'administration'
 urlpatterns = [
     path('',views.Index.as_view(),name="index"),    
     path('user-management/',views.UserManagement.as_view(),name="user-management"),    
+    path('block-user/<str:user_id>',views.BlockUser.as_view(),name="block-user"),    
     path('role-management/',views.RoleManagement.as_view(),name="role-management"),    
     path('add-role/',views.AddRole.as_view(),name="add-role"),    
     path('category-management/',views.CategoryManagement.as_view(),name="category-management"),    

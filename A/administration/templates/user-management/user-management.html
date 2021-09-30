@@ -10,11 +10,11 @@
 <section class="content">
     <h1>بخش مدیریت کاربران</h1>
     <hr/>
+    {% include "layouts/administration/includes/messages.html" %}
     {% if users %}
     <div class="box">
         <div class="box-header">
           <h3 class="box-title">لیست کاربران</h3>
-
           <form class="box-tools">
             <div class="input-group input-group-sm" style="width: 150px;">
               <input type="text" name="search" class="form-control pull-right" placeholder="جستجو" value="{{search}}">
@@ -74,9 +74,18 @@
                             <a class="btn btn-warning" href="" title="ویرایش">
                                 <i class="fa fa-pencil" aria-hidden="true"></i>
                             </a>
-                            <a class="btn btn-danger" href="" title="بلاک">
-                                <i class="fa fa-lock" aria-hidden="true"></i>
+                            <a class="btn btn-info" href="" title="فعالیت ها">
+                                <i class="fa fa-info" aria-hidden="true"></i>
                             </a>
+                            {% if user.is_blocked %}
+                                <a class="btn btn-success" href="{% url 'administration:block-user' user.id %}" title="آن بلاک">
+                                    <i class="fa fa-unlock" aria-hidden="true"></i>
+                                </a>
+                            {% else %}
+                                <a class="btn btn-danger" href="{% url 'administration:block-user' user.id %}" title="بلاک">
+                                    <i class="fa fa-lock" aria-hidden="true"></i>
+                                </a>
+                            {% endif %}
                         </td>
                     </tr>
                     {% endfor %}
