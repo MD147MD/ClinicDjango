@@ -3,6 +3,7 @@ from django.views import View
 from .pages.index import Index
 from .pages.UserManagement.userManagement import UserManagement
 from .pages.UserManagement.blockUser import BlockUser
+from .pages.UserManagement.editUser import EditUser
 from .pages.RoleManagement.roleManagement import RoleManagement
 from .pages.RoleManagement.add_role import AddRole
 from .pages.CategoryManagement.categoryManagement import CategoryManagement

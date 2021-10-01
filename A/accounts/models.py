@@ -63,7 +63,7 @@ class User(AbstractUser):
     is_blocked = models.BooleanField(default=False)
     is_removed = models.BooleanField(default=False)
     objects = UserManager()
-    age = models.PositiveSmallIntegerField(default=0)
+    age = models.PositiveSmallIntegerField(null=True,blank=True)
     profile_img = models.ImageField(null=True,blank=True)
     doctor_shift = models.CharField(max_length=120,null=True,blank=True)
     doctor_resume = models.TextField(max_length=3000,null=True,blank=True)

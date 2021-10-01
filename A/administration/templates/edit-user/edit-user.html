@@ -1,0 +1,96 @@
+{% extends 'layouts/administration/administration_base.html' %}
+
+
+{% block content %}
+<section class="content">
+    <div class="box box-warning">
+        <div class="box-header with-border">
+          <h3 class="box-title">فرم ویرایش کاربر</h3>
+        </div>
+        <!-- /.box-header -->
+        <div class="box-body">
+          <form role="form" method="post" enctype="multipart/form-data" novalidate>
+            {% if form.errors %}
+            <div class="alert alert-danger">
+                <ul>
+                {% for field in form %}
+                    {% for error in field.errors %} 
+                        <li>{{error}}</li>
+                    {% endfor %}
+                {% endfor %}
+                </ul>
+            </div>
+            {% endif %}
+
+            {% csrf_token %}
+            <div class="form-group">
+              <label>نام</label>
+              <!-- <input type="text" class="form-control" placeholder="نام"> -->
+              {{form.name}}
+            </div>
+
+            <div class="form-group">
+                <label>نام خانوادگی</label>
+                <!-- <input type="text" class="form-control" placeholder="نام خانوادگی"> -->
+                {{form.family}}
+            </div>
+
+            <div class="form-group">
+                <label>شماره تلفن</label>
+                <!-- <input type="text" class="form-control" placeholder="09xxxxxxxxx"> -->
+                {{form.phone_number}}
+            </div>
+
+            <div class="form-group">
+                <label>ایمیل</label>
+                <!-- <input type="text" class="form-control" placeholder="example@email.com"> -->
+                {{form.email}}
+            </div>
+
+            <div class="form-group">
+                <label>سن</label>
+                <!-- <input type="text" class="form-control" placeholder="00"> -->
+                {{form.age}}
+            </div>
+
+            <div class="form-group">
+                <label class="btn btn-primary" type="button" for="profile_img">عکس پروفایل</label>                
+                <!-- <input type="file" class="form-control"> -->
+                {{form.profile_img}}
+            </div>
+            {% if is_doctor %}
+            <div class="form-group">
+                <label>شیفت کاری</label>
+                <!-- <input type="text" class="form-control" placeholder="شیفت کاری"> -->
+                {{form.doctor_shift}}
+            </div>
+
+            <div class="form-group">
+                <label>رزومه</label>
+                <!-- <textarea class="form-control" placeholder="رزومه"></textarea> -->
+                {{form.doctor_resume}}
+            </div>
+            {% endif %}
+            <div class="form-group">
+                <h3>نقش ها</h3>
+                <hr/>
+                <!-- <select class="form-control" multiple>
+                    {% for role in roles %}
+                        <option value="role.id">{{role.role_name}}</option>
+                    {% endfor %}
+                </select> -->
+                {{form.roles}}
+            </div>
+
+            <div class="form-group">
+                <button class="btn btn-primary btn-block">
+                ذخیره
+                <i class="fa fa-floppy-o" aria-hidden="true"></i>
+                </button>
+            </div>           
+          </form>
+        </div>
+        <!-- /.box-body -->
+      </div>
+</section>
+{% endblock %}
