@@ -71,20 +71,26 @@
                             </span>
                         </td>
                         <td>
-                            <a class="btn btn-warning" href="{% url 'administration:edit-user' user.id %}" title="ویرایش">
-                                <i class="fa fa-pencil" aria-hidden="true"></i>
-                            </a>
-                            <a class="btn btn-info" href="" title="فعالیت ها">
-                                <i class="fa fa-info" aria-hidden="true"></i>
-                            </a>
-                            {% if user.is_blocked %}
-                                <a class="btn btn-success" href="{% url 'administration:block-user' user.id %}" title="آن بلاک">
-                                    <i class="fa fa-unlock" aria-hidden="true"></i>
+                            {% if can_edit_user %}
+                                <a class="btn btn-warning" href="{% url 'administration:edit-user' user.id %}" title="ویرایش">
+                                    <i class="fa fa-pencil" aria-hidden="true"></i>
                                 </a>
-                            {% else %}
-                                <a class="btn btn-danger" href="{% url 'administration:block-user' user.id %}" title="بلاک">
-                                    <i class="fa fa-lock" aria-hidden="true"></i>
+                            {% endif %}
+                            {% if can_see_user_actions %}
+                                <a class="btn btn-info" href="{% url 'administration:user-actions' user.id %}" title="فعالیت ها">
+                                    <i class="fa fa-info" aria-hidden="true"></i>
                                 </a>
+                            {% endif %}
+                            {% if can_block_user %}
+                                {% if user.is_blocked %}
+                                    <a class="btn btn-success" href="{% url 'administration:block-user' user.id %}" title="آن بلاک">
+                                        <i class="fa fa-unlock" aria-hidden="true"></i>
+                                    </a>
+                                {% else %}
+                                    <a class="btn btn-danger" href="{% url 'administration:block-user' user.id %}" title="بلاک">
+                                        <i class="fa fa-lock" aria-hidden="true"></i>
+                                    </a>
+                                {% endif %}
                             {% endif %}
                         </td>
                     </tr>
@@ -93,27 +99,29 @@
             </table>
         </div>
       </div>
-    <div class="text-center">
-        <br/>
-        <div class="box-tools">
-            <ul class="pagination pagination-sm no-margin ">
-                {% if has_previous %}
-                    <li class="paginate_button"><a href="{{request.path}}?page={{current_page|add:-1}}&search={{search}}"> &lt;&lt;</a></li>
-                {% endif %}
-                {% for page in page_range %}
-                    {% if page == current_page %}
-                        <li class="paginate_button active"><a>{{page}}</a></li>
-                    {% else %}
-                        <li class="paginate_button"><a href="{{request.path}}?page={{page}}&search={{search}}">{{page}}</a></li>
+    {% if page_count > 1%}
+        <div class="text-center">
+            <br/>
+            <div class="box-tools">
+                <ul class="pagination pagination-sm no-margin ">
+                    {% if has_previous %}
+                        <li class="paginate_button"><a href="{{request.path}}?page={{current_page|add:-1}}&search={{search}}"> &lt;&lt;</a></li>
                     {% endif %}
-                {% endfor %}
-                {% if has_next %}
-                    <li class="paginate_button"><a href="{{request.path}}?page={{current_page|add:1}}&search={{search}}">>></a></li>
-                {% endif %}
-            </ul>
-          </div>
-            
-    </div>
+                    {% for page in page_range %}
+                        {% if page == current_page %}
+                            <li class="paginate_button active"><a>{{page}}</a></li>
+                        {% else %}
+                            <li class="paginate_button"><a href="{{request.path}}?page={{page}}&search={{search}}">{{page}}</a></li>
+                        {% endif %}
+                    {% endfor %}
+                    {% if has_next %}
+                        <li class="paginate_button"><a href="{{request.path}}?page={{current_page|add:1}}&search={{search}}">>></a></li>
+                    {% endif %}
+                </ul>
+            </div>
+                
+        </div>
+    {% endif %}
     {% else %}
     <div class="alert alert-warning">کاربری وجود ندارد
         <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>

@@ -30,6 +30,9 @@ class UserManagement(View):
         paginated_users = user_pages.page(page)
         max_page = page + 3 if (page + 3) <= page_count else page_count
         min_page = page - 3 if (page - 3) >= 1 else 1
+        edit_user_permission_code = 12
+        block_user_permission_code = 13
+        see_user_actions_permission_code = 14
         return render(request,"user-management/user-management.html",{
             "section":"مدیریت کاربران",
             "page":"دیدن کاربران",
@@ -43,5 +46,8 @@ class UserManagement(View):
             "current_page":page,
             "search":search,
             "page_range":range(min_page,max_page + 1),
+            "can_edit_user":request.user.has_permission(edit_user_permission_code),
+            "can_block_user":request.user.has_permission(block_user_permission_code),
+            "can_see_user_actions":request.user.has_permission(see_user_actions_permission_code)
         })
 

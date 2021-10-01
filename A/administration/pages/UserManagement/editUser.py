@@ -3,7 +3,7 @@ from django.views import View
 from accounts.models import User
 from administration.forms import EditUserForm
 from uuid import UUID
-
+from django.contrib import messages
 
 class EditUser(View):
 
@@ -68,6 +68,7 @@ class EditUser(View):
             user.doctor_resume = cd['doctor_resume']
             user.roles.set(cd['roles'])
             user.save()
+            messages.success(request,"کاربر مورد نظر با موفقیت ویرایش شد","info")
             return redirect("/administration/user-management")
         return render(request,"edit-user/edit-user.html",{
             "section":"مدیریت کاربران",
@@ -77,3 +78,5 @@ class EditUser(View):
             "user":user,
             "is_doctor":user.has_permission(doctor_permission_code)
         })
+
+

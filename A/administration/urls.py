@@ -9,9 +9,12 @@ urlpatterns = [
     path('user-management/',views.UserManagement.as_view(),name="user-management"),    
     path('edit-user/<str:user_id>',views.EditUser.as_view(),name="edit-user"),    
     path('block-user/<str:user_id>',views.BlockUser.as_view(),name="block-user"),    
+    path('user-actions/<str:user_id>',views.UserActions.as_view(),name="user-actions"),
     # ====================================
     path('role-management/',views.RoleManagement.as_view(),name="role-management"),    
     path('add-role/',views.AddRole.as_view(),name="add-role"),    
+    path('edit-role/<str:role_id>',views.EditRole.as_view(),name="edit-role"),    
+    path('remove-role/<str:role_id>',views.RemoveRole.as_view(),name="remove-role"),    
     # ====================================
     path('category-management/',views.CategoryManagement.as_view(),name="category-management"),    
     path('add-category/',views.AddCategory.as_view(),name="add-category"),    

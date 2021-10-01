@@ -10,6 +10,7 @@ secure_urls = [
     {'url':'user-management','permission_code':10},
     {'url':'edit-user','permission_code':12},
     {'url':'block-user','permission_code':13},
+    {'url':'user-actions','permission_code':14},
     # ===========================================
     {'url':'role-management','permission_code':20},
     {'url':'add-role','permission_code':21},

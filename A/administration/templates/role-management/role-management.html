@@ -7,6 +7,15 @@
 <section class="content">
     <h1>بخش مدیریت نقش ها</h1>
     <hr/>
+    {% include "layouts/administration/includes/messages.html" %}
+    {% if can_add_role %}
+    <div class="text-center">
+        <a class="btn btn-primary" href="{% url 'administration:add-role' %}">افزودن نقش
+            <i class="fa fa-plus-square" aria-hidden="true"></i>
+        </a>
+    </div>
+    <p></p>
+    {% endif %}
     {% if roles %}
     <div class="box">
         <div class="box-header">
@@ -44,12 +53,16 @@
                             </ul>
                         </td>
                         <td>
-                            <a class="btn btn-warning" href="" title="ویرایش">
-                                <i class="fa fa-pencil" aria-hidden="true"></i>
-                            </a>
-                            <a class="btn btn-danger" href="" title="حذف">
-                                <i class="fa fa-trash" aria-hidden="true"></i>
-                            </a>
+                            {% if can_edit_role %}
+                                <a class="btn btn-warning" href="{% url 'administration:edit-role' role.id %}" title="ویرایش">
+                                    <i class="fa fa-pencil" aria-hidden="true"></i>
+                                </a>
+                            {% endif %}
+                            {% if can_remove_role %}
+                                <a class="btn btn-danger" href="{% url 'administration:remove-role' role.id %}" title="حذف">
+                                    <i class="fa fa-trash" aria-hidden="true"></i>
+                                </a>
+                            {% endif %}
                         </td>
                     </tr>
                     {% endfor %}
@@ -57,27 +70,29 @@
             </table>
         </div>
       </div>
-    <div class="text-center">
-        <br/>
-        <div class="box-tools">
-            <ul class="pagination pagination-sm no-margin ">
-                {% if has_previous %}
-                    <li class="paginate_button"><a href="{{request.path}}?page={{current_page|add:-1}}&search={{search}}"> &lt;&lt;</a></li>
-                {% endif %}
-                {% for page in page_range %}
-                    {% if page == current_page %}
-                        <li class="paginate_button active"><a>{{page}}</a></li>
-                    {% else %}
-                        <li class="paginate_button"><a href="{{request.path}}?page={{page}}&search={{search}}">{{page}}</a></li>
+    {% if page_count > 1 %}
+        <div class="text-center">
+            <br/>
+            <div class="box-tools">
+                <ul class="pagination pagination-sm no-margin ">
+                    {% if has_previous %}
+                        <li class="paginate_button"><a href="{{request.path}}?page={{current_page|add:-1}}&search={{search}}"> &lt;&lt;</a></li>
                     {% endif %}
-                {% endfor %}
-                {% if has_next %}
-                    <li class="paginate_button"><a href="{{request.path}}?page={{current_page|add:1}}&search={{search}}">>></a></li>
-                {% endif %}
-            </ul>
-          </div>
-            
-    </div>
+                    {% for page in page_range %}
+                        {% if page == current_page %}
+                            <li class="paginate_button active"><a>{{page}}</a></li>
+                        {% else %}
+                            <li class="paginate_button"><a href="{{request.path}}?page={{page}}&search={{search}}">{{page}}</a></li>
+                        {% endif %}
+                    {% endfor %}
+                    {% if has_next %}
+                        <li class="paginate_button"><a href="{{request.path}}?page={{current_page|add:1}}&search={{search}}">>></a></li>
+                    {% endif %}
+                </ul>
+            </div>
+                
+        </div>
+    {% endif %}
     {% else %}
     <div class="alert alert-warning">نقشی وجود ندارد
         <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>

@@ -29,6 +29,9 @@ class RoleManagement(View):
         paginated_roles = role_pages.page(page)
         max_page = page + 3 if (page + 3) <= page_count else page_count
         min_page = page - 3 if (page - 3) >= 1 else 1
+        add_role_permission_code = 21
+        edit_role_permission_code = 22
+        remove_role_permission_code = 23
         return render(request,"role-management/role-management.html",{
             "section":"مدیریت نقش ها",
             "page":"دیدن نقش ها",
@@ -41,5 +44,8 @@ class RoleManagement(View):
             "max_page":max_page,
             "current_page":page,
             "search":search,
-            "page_range":range(min_page,max_page + 1)
+            "page_range":range(min_page,max_page + 1),
+            "can_add_role":request.user.has_permission(add_role_permission_code),
+            "can_edit_role":request.user.has_permission(edit_role_permission_code),
+            "can_remove_role": request.user.has_permission(remove_role_permission_code)
         })

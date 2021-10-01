@@ -19,9 +19,9 @@ class EditUserForm(forms.Form):
     'min_length':'تعداد حروف نام خانوادگی کمتر از حد مجاز است'}
     ,widget=forms.TextInput({'placeholder':'نام خانوادگی','class':'form-control'}))
 
-    phone_number = forms.CharField(max_length=11,min_length=11,
+    phone_number = forms.CharField(max_length=11,min_length=11,required=True,
     error_messages={'max_length':'تعداد حروف شماره تلفن بیشتر از حد مجاز است'
-    ,'min_length':'تعداد حروف شماره تلفن کمتر از حد مجاز است'},widget=forms.NumberInput(attrs={'class':'form-control','placeholder':'09xxxxxxxxx'}))
+    ,'min_length':'تعداد حروف شماره تلفن کمتر از حد مجاز است','required':'لطفا شماره تلفن را وارد کنید'},widget=forms.NumberInput(attrs={'class':'form-control','placeholder':'09xxxxxxxxx'}))
 
     email = forms.EmailField(max_length=70
     ,min_length=10,
@@ -34,7 +34,7 @@ class EditUserForm(forms.Form):
     ,min_value=4,
     required=False,
     error_messages={'max_value':'سن وارد شده بیشتر از حد مجاز است',
-    'min_value':'سن وارد شده کمتر از حد مجاز است'}
+    'min_value':'سن وارد شده کمتر از حد مجاز است','invalid':'سن وارد شده معتبر نیست'}
     ,widget=forms.NumberInput({'placeholder':'00','class':'form-control'}))
 
     profile_img = forms.ImageField(required=False,error_messages={'invalid':'لطفا بجز عکس چیز دیگری انتخاب نکنید'},widget=forms.FileInput(attrs={'style':'display:none','id':'profile_img'}))
@@ -54,3 +54,15 @@ class EditUserForm(forms.Form):
     ,widget=forms.Textarea({'placeholder':'رزومه دکتر','class':'form-control','rows':5}))
 
     roles = forms.MultipleChoiceField(required=False,widget=forms.CheckboxSelectMultiple(),choices=Role.objects.all().values_list('id','role_name'))
+
+    def clean_phone_number(self):
+        phone_number = self.cleaned_data["phone_number"]
+        try:
+            int(phone_number)
+            if phone_number[0:2] != "09":
+                raise forms.ValidationError("شماره تلفن وارد شده معتبر نیست")
+        except:
+            raise forms.ValidationError("شماره تلفن وارد شده معتبر نیست")
+        return phone_number
+    
+   
