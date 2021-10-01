@@ -1,2 +1,3 @@
 from .administration_forms.editUser import EditUserForm
 from .administration_forms.addRole import AddRoleForm
+from .administration_forms.addPicture import AddPictureForm

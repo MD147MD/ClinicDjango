@@ -21,6 +21,8 @@ urlpatterns = [
     # ====================================
     path('picture-management/',views.PictureManagement.as_view(),name="picture-management"),    
     path('add-picture/',views.AddPicture.as_view(),name="add-picture"),    
+    path('edit-picture/<str:picture_id>',views.EditPicture.as_view(),name="edit-picture"),    
+    path('remove-picture/<str:picture_id>',views.RemovePicture.as_view(),name="remove-picture"),    
     # ====================================
     path('edit-site-settings/',views.EditSiteSettings.as_view(),name="edit-site-settings"),    
     # ====================================

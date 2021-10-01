@@ -15,6 +15,8 @@ from .pages.CategoryManagement.add_category import AddCategory
 # ========================================================
 from .pages.PictureManagement.pictureManagement import PictureManagement
 from .pages.PictureManagement.add_picture import AddPicture
+from .pages.PictureManagement.edit_picture import EditPicture
+from .pages.PictureManagement.remove_picture import RemovePicture
 # ========================================================
 from .pages.SiteSettings.edit_site_settings import EditSiteSettings
 # ========================================================

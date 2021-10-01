@@ -29,6 +29,9 @@ class PictureManagement(View):
         paginated_pictures = picture_pages.page(page)
         max_page = page + 3 if (page + 3) <= page_count else page_count
         min_page = page - 3 if (page - 3) >= 1 else 1
+        add_picture_permission_code = 31
+        edit_picture_permission_code = 32
+        remove_picture_permission_code = 33
         return render(request,"picture-management/picture-management.html",{
             "section":"مدیریت عکس ها",
             "page":"دیدن عکس ها",
@@ -41,5 +44,8 @@ class PictureManagement(View):
             "max_page":max_page,
             "current_page":page,
             "search":search,
-            "page_range":range(min_page,max_page + 1)
+            "page_range":range(min_page,max_page + 1),
+            "can_add_picture":request.user.has_permission(add_picture_permission_code),
+            "can_edit_picture":request.user.has_permission(edit_picture_permission_code),
+            "can_remove_picture":request.user.has_permission(remove_picture_permission_code)
         })
