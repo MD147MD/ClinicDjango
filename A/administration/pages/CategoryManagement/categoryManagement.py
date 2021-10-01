@@ -29,6 +29,9 @@ class CategoryManagement(View):
         paginated_categories = category_pages.page(page)
         max_page = page + 3 if (page + 3) <= page_count else page_count
         min_page = page - 3 if (page - 3) >= 1 else 1
+        add_category_permission_code = 41
+        edit_category_permission_code = 42
+        remove_category_permission_code = 43
         return render(request,"category-management/category-management.html",{
             "section":"مدیریت دسته ها",
             "page":"دیدن دسته ها",
@@ -41,5 +44,8 @@ class CategoryManagement(View):
             "max_page":max_page,
             "current_page":page,
             "search":search,
-            "page_range":range(min_page,max_page + 1)
+            "page_range":range(min_page,max_page + 1),
+            "can_add_category":request.user.has_permission(add_category_permission_code),
+            "can_edit_category":request.user.has_permission(edit_category_permission_code),
+            "can_remove_category":request.user.has_permission(remove_category_permission_code)
         })

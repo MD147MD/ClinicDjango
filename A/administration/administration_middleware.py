@@ -26,6 +26,9 @@ secure_urls = [
     {'url':'add-category','permission_code':41},
     {'url':'edit-category','permission_code':42},
     {'url':'remove-category','permission_code':43},
+    {'url':'add-sub-category','permission_code':41},
+    {'url':'edit-sub-category','permission_code':42},
+    {'url':'remove-sub-category','permission_code':43},
     # ===========================================
 ]
 

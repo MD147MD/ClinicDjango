@@ -18,6 +18,11 @@ urlpatterns = [
     # ====================================
     path('category-management/',views.CategoryManagement.as_view(),name="category-management"),    
     path('add-category/',views.AddCategory.as_view(),name="add-category"),    
+    path('edit-category/<str:category_id>',views.EditCategory.as_view(),name="edit-category"),    
+    path('remove-category/<str:category_id>',views.RemoveCategory.as_view(),name="remove-category"),    
+    path('add-sub-category/<str:category_id>',views.AddSubCategory.as_view(),name="add-sub-category"),    
+    path('edit-sub-category/<str:sub_category_id>',views.EditSubCategory.as_view(),name="edit-sub-category"),    
+    path('remove-sub-category/<str:sub_category_id>',views.RemoveSubCategory.as_view(),name="remove-sub-category"),    
     # ====================================
     path('picture-management/',views.PictureManagement.as_view(),name="picture-management"),    
     path('add-picture/',views.AddPicture.as_view(),name="add-picture"),    

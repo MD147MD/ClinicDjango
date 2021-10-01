@@ -7,6 +7,15 @@
 <section class="content">
     <h1>بخش مدیریت دسته ها</h1>
     <hr/>
+    {% include "layouts/administration/includes/messages.html" %}
+    {% if can_add_category %}
+    <div class="text-center">
+        <a class="btn btn-primary" href="{% url 'administration:add-category' %}">افزودن دسته
+            <i class="fa fa-plus-square" aria-hidden="true"></i>
+        </a>
+    </div>
+    <p></p>
+    {% endif %}
     {% if categories %}
     <div class="box">
         <div class="box-header">
@@ -39,17 +48,38 @@
                         <td>
                             <ul>
                                 {% for sub_category in category.sub_categories.all %}
-                                <li>{{sub_category.sub_category_name}}</li>
+                                <li>{{sub_category.sub_category_name}}
+                                    {% if can_edit_category %}
+                                        <a class="btn btn-warning" href="{% url 'administration:edit-sub-category' sub_category.id %}" title="ویرایش">
+                                            <i class="fa fa-pencil" aria-hidden="true"></i>
+                                        </a>
+                                    {% endif %}
+                                    {% if can_remove_category %}
+                                    <a class="btn btn-danger" href="{% url 'administration:remove-sub-category' sub_category.id %}" title="حذف">
+                                        <i class="fa fa-trash" aria-hidden="true"></i>
+                                    </a>
+                                    {% endif %}
+                                </li>
+                                <p></p>
                                 {% endfor %}
                             </ul>
                         </td>
                         <td>
-                            <a class="btn btn-warning" href="" title="ویرایش">
+                            {% if can_add_category %}
+                            <a class="btn btn-primary" href="{% url 'administration:add-sub-category' category.id%}" title="افزودن زیردسته">
+                                <i class="fa fa-plus-square" aria-hidden="true"></i>
+                            </a>
+                            {% endif %}
+                            {% if can_edit_category %}
+                            <a class="btn btn-warning" href="{% url 'administration:edit-category' category.id %}" title="ویرایش">
                                 <i class="fa fa-pencil" aria-hidden="true"></i>
                             </a>
-                            <a class="btn btn-danger" href="" title="حذف">
+                            {% endif %}
+                            {% if can_remove_category %}
+                            <a class="btn btn-danger" href="{% url 'administration:remove-category' category.id %}" title="حذف">
                                 <i class="fa fa-trash" aria-hidden="true"></i>
                             </a>
+                            {% endif %}
                         </td>
                     </tr>
                     {% endfor %}

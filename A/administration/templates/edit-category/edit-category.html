@@ -1,0 +1,41 @@
+{% extends 'layouts/administration/administration_base.html' %}
+
+
+{% block content %}
+    <section class="content">
+        <div class="box box-info">
+            <div class="box-header with-border">
+              <h3 class="box-title">فرم ویرایش دسته</h3>
+            </div>
+            <!-- /.box-header -->
+            <!-- form start -->
+            <form method="POST" novalidate>
+            {% csrf_token %}
+            {% if form.errors %}
+                <div class="alert alert-danger">
+                    <ul>
+                    {% for field in form %}
+                        {% for error in field.errors %} 
+                            <li>{{error}}</li>
+                        {% endfor %}
+                    {% endfor %}
+                    </ul>
+                </div>
+            {% endif %}
+              <div class="box-body">
+                <div class="form-group">
+                    <label>نام دسته</label>
+                    {{form.category_name}}
+                </div>
+                <p></p>
+                <div class="form-group text-center">
+                    <button type="submit" class="btn btn-success btn-block">
+                        ویرایش
+                        <i class="fa fa-pencil" aria-hidden="true"></i>
+                    </button>
+                </div>
+              </div>
+            </form>
+          </div>
+    </section>
+{% endblock %}

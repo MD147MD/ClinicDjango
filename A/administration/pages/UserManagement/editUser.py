@@ -23,7 +23,8 @@ class EditUser(View):
             'age':user.age,
             'doctor_shift':user.doctor_shift,
             'doctor_resume':user.doctor_resume,
-            'roles':list(user.roles.values_list('id',flat=True))
+            'roles':list(user.roles.values_list('id',flat=True)),
+            'categories':list(user.categories.values_list('id',flat=True))
         }
         doctor_permission_code = 50
         return render(request,"edit-user/edit-user.html",{
@@ -67,6 +68,7 @@ class EditUser(View):
             user.doctor_shift = cd['doctor_shift']
             user.doctor_resume = cd['doctor_resume']
             user.roles.set(cd['roles'])
+            user.categories.set(cd['categories'])
             user.save()
             messages.success(request,"کاربر مورد نظر با موفقیت ویرایش شد","info")
             return redirect("/administration/user-management")

@@ -1,5 +1,5 @@
 from django import forms
-from accounts.models import User,Role
+from accounts.models import Role,SubCategory
 from uuid import uuid4
 import os
 
@@ -38,6 +38,9 @@ class EditUserForm(forms.Form):
     ,widget=forms.NumberInput({'placeholder':'00','class':'form-control'}))
 
     profile_img = forms.ImageField(required=False,error_messages={'invalid':'لطفا بجز عکس چیز دیگری انتخاب نکنید'},widget=forms.FileInput(attrs={'style':'display:none','id':'profile_img'}))
+
+    categories = forms.MultipleChoiceField(required=False,widget=forms.SelectMultiple(attrs={"class":"form-control"}),
+    choices=SubCategory.objects.all().values_list("id","sub_category_name"))
 
     doctor_shift = forms.CharField(max_length=200
     ,min_length=10,

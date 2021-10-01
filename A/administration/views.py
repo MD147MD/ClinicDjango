@@ -12,6 +12,11 @@ from .pages.RoleManagement.remove_role import RemoveRole
 # ========================================================
 from .pages.CategoryManagement.categoryManagement import CategoryManagement
 from .pages.CategoryManagement.add_category import AddCategory
+from .pages.CategoryManagement.edit_category import EditCategory
+from .pages.CategoryManagement.remove_category import RemoveCategory
+from .pages.CategoryManagement.add_sub_category import AddSubCategory
+from .pages.CategoryManagement.edit_sub_category import EditSubCategory
+from .pages.CategoryManagement.remove_sub_category import RemoveSubCategory
 # ========================================================
 from .pages.PictureManagement.pictureManagement import PictureManagement
 from .pages.PictureManagement.add_picture import AddPicture
