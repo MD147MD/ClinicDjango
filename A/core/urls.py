@@ -4,6 +4,7 @@ from . import views
 app_name = 'core'
 urlpatterns = [
     path('login/',views.Login.as_view(),name='login'),
+    path('verify-phone/',views.VerifyPhone.as_view(),name='verify-phone'),
     path('logout/',views.Logout.as_view(),name='logout'),
     path('user-panel/',views.UserPanel.as_view(),name='user-panel'),
     path('pictures/',views.Pictures.as_view(),name='pictures'),

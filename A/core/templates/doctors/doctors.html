@@ -12,6 +12,18 @@
 {% endblock %}
 
 {% block content %}
+
+
+<div class="modal">
+    <!-- Shift Modal content -->
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <p id="modal-content"></p>
+     </div>
+
+</div> 
+
+
 <div class="row">
     <div class="col-md-5">
         <div class="card m-2">
@@ -22,12 +34,9 @@
               <blockquote class="blockquote mb-0 text-end">
                 <form>
                     {% for category in categories %}
-                    <div class="form-check">
-                        <label class="form-check-label">
+                    <p class="form-check-label">
                           {{category.category_name}}
-                        </label>
-                        <input class="form-check-input" type="checkbox" >
-                    </div>
+                    </p>
                     <hr/>
                     <ul>
                         {% for sub_category in category.sub_categories.all %}
@@ -35,7 +44,11 @@
                             <label class="form-check-label">
                                {{sub_category.sub_category_name}}
                             </label>
-                            <input class="form-check-input" type="checkbox" >
+                            {% if sub_category in selected_sub_categories %}
+                            <input class="form-check-input" name="sub-categories" type="checkbox" value="{{sub_category.id}}" checked>
+                            {% else %}
+                            <input class="form-check-input" name="sub-categories" type="checkbox" value="{{sub_category.id}}">
+                            {% endif %}
                         </li>
                         <hr/>
                         {% endfor %}
@@ -66,14 +79,6 @@
                                         <img src="{% static 'core/assets/images/doctor-profile.jpg' %}" class="doctor-profile" alt="">
                                         {% endif %}
                                     </div>
-                                    <div class="modal">
-                                        <!-- Shift Modal content -->
-                                        <div class="modal-content">
-                                        <span class="close">&times;</span>
-                                        <p id="modal-content"></p>
-                                    </div>
-                                    
-                                    </div> 
                                     <div class="doctor-card-content">
                                     {% for category in doctor.categories.all %}
                                     <span class="badge bg-danger">{{category.sub_category_name}}</span>  

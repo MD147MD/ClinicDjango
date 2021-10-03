@@ -20,13 +20,15 @@
             درمانگاه فرهنگیان کوهدشت
         </h1>
         {% if request.user.is_authenticated %}
-        <button class="nav-button"><a href="{% url 'core:logout' %}" class="button-href"></a> خروج</button>
+        <button class="nav-button"><a href="{% url 'core:logout' %}" class="button-href"> خروج</a></button>
         <button class="nav-button"><a href="{% url 'core:user-panel' %}" class="button-href">حساب کاربری</a></button>
         {% else %}
-        <button class="nav-button"><a href="{% url 'core:login' %}" class="button-href"></a>ورود به حساب کاربری</button>
+        <button class="nav-button"><a href="{% url 'core:login' %}" class="button-href">ورود به حساب کاربری</a></button>
         {% endif %}
+        <button class="nav-button"><a href="{% url 'core:home' %}" class="button-href">خانه</a></button>
         <br/>
     </header>
+    {% include "layouts/core/includes/messages.html"%}
     <!-- content -->
     {% block content %}{% endblock %}
     <!-- end-content -->

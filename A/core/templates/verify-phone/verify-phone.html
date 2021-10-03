@@ -3,7 +3,7 @@
 
 
 {% block title %}
-ورود
+راستی آزمایی 
 {% endblock %}
 
 {% block styles %}
@@ -15,20 +15,20 @@
     <div class="wrapper fadeInDown">
         <div id="formContent">
             {% if form.errors %}
-            <div class="alert alert-danger">
-                <ul>
-                {% for field in form %}
-                    {% for error in field.errors %} 
-                        <li>{{error}}</li>
+                <div class="alert alert-danger">
+                    <ul>
+                    {% for field in form %}
+                        {% for error in field.errors %} 
+                            <li>{{error}}</li>
+                        {% endfor %}
                     {% endfor %}
-                {% endfor %}
-                </ul>
-            </div>
-        {% endif %}
+                    </ul>
+                </div>
+            {% endif %}
             <form method="POST">
                 {% csrf_token %}
-                {{form.phone_number}}
-                <input type="submit" class="fadeIn fourth" value="ارسال کد راستی آزمایی">
+                {{form.code}}
+                <input type="submit" class="fadeIn fourth" value="راستی آزمایی">
             </form>
 
             </div>
