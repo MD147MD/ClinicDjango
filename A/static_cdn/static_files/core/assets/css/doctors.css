@@ -1,0 +1,73 @@
+
+.filters-header {
+    background-color: #242222;
+    color:white;
+}
+
+@media (max-width: 400px) {
+    .doctor-card-content {
+        font-size: 15px;
+    }
+    .button {
+        font-size: 15px;
+    }
+}
+
+@media (min-width: 400px) {
+    .doctor-card-content {
+        font-size: 30px;
+    }
+    .button {
+        font-size: 20px;
+        width:20%;
+    }
+}
+
+.doctor-profile {
+    width: 15%;
+    border-radius: 50%;
+}
+
+.doctor-card-title {
+    background-color: #474547;
+    color:white
+}
+
+li{
+    list-style-type: none; 
+}
+
+
+
+.modal {
+   
+}
+
+
+  
+/* Modal Content */
+.modal-content {
+background-color: #fefefe;
+margin: auto;
+padding: 20px;
+border: 1px solid #888;
+width: 80%;
+}
+
+/* The Close Button */
+.close {
+color: #aaaaaa;
+float: right;
+font-size: 28px;
+font-weight: bold;
+}
+
+
+
+.close:hover,
+.close:focus {
+color: #000;
+text-decoration: none;
+cursor: pointer;
+}
+

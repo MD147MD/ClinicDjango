@@ -1,0 +1,47 @@
+{% extends 'layouts/administration/administration_base.html'%}
+
+
+{% load static %}
+
+
+{% block content %}
+        <div class="box box-success">
+            <div class="box-header with-border">
+              <h3 class="box-title">تنظیمات وبسایت</h3>
+            </div>
+            <div class="box-body">
+             {% include "layouts/administration/includes/messages.html" %}
+              <form method="POST">
+                {% csrf_token %}
+                {% if form.errors %}
+                    <div class="alert alert-danger">
+                        <ul>
+                        {% for field in form %}
+                            {% for error in field.errors %} 
+                                <li>{{error}}</li>
+                            {% endfor %}
+                        {% endfor %}
+                        </ul>
+                    </div>
+                {% endif %}
+                <h2>صفحه درباره ما</h2>
+                <br/>
+                {{form.about_us}}
+                <hr/>
+                <h2>صفحه ارتباط با ما</h2>
+                <br/>
+                {{form.contact_us}}
+                <div class="form-group">
+                  <button type="submit" class="btn btn-success btn-block">ذخیره
+                    <i class="fa fa-floppy-o" aria-hidden="true"></i>
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+{% endblock %}
+
+{% block scripts %}
+<script type="text/javascript" src="{% static 'ckeditor/ckeditor-init.js' %}"></script>
+<script type="text/javascript" src="{% static 'ckeditor/ckeditor/ckeditor.js' %}"></script>
+{% endblock %}

@@ -1,0 +1,32 @@
+{% extends 'layouts/core/core_base.html'%}
+{% load static %}
+
+
+{% block title %}
+ورود
+{% endblock %}
+
+{% block styles %}
+<link rel="stylesheet" href="{% static 'core/assets/css/login.css' %}">
+{% endblock  %}
+
+{% block content %}
+<div>
+    <div class="wrapper fadeInDown">
+        <div id="formContent">
+        
+            <form>
+                <input type="text" id="phone-number" class="fadeIn second" placeholder="شماره تلفن">
+                <input type="submit" class="fadeIn fourth" value="ارسال کد راستی آزمایی">
+            </form>
+
+            </div>
+        
+        </div>
+    </div>
+</div>
+{% block scripts %}
+<script src="{% static 'core/assets/js/login.js' %}"></script>
+{% endblock %}
+{% endblock %}
+

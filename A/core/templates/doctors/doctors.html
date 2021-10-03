@@ -1,0 +1,110 @@
+{% extends 'layouts/core/core_base.html'%}
+{% load static %}
+
+{% block title %}
+پزشک ها
+{% endblock %}
+
+
+{% block styles %}
+<link rel="stylesheet" href="{% static 'core/assets/css/doctors.css' %}">
+
+{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-5">
+        <div class="card m-2">
+            <div class="card-header text-center filters-header">
+              <h2>فیلتر ها </h2>
+            </div>
+            <div class="card-body">
+              <blockquote class="blockquote mb-0 text-end">
+                <form>
+                    {% for category in categories %}
+                    <div class="form-check">
+                        <label class="form-check-label">
+                          {{category.category_name}}
+                        </label>
+                        <input class="form-check-input" type="checkbox" >
+                    </div>
+                    <hr/>
+                    <ul>
+                        {% for sub_category in category.sub_categories.all %}
+                        <li class="form-check">
+                            <label class="form-check-label">
+                               {{sub_category.sub_category_name}}
+                            </label>
+                            <input class="form-check-input" type="checkbox" >
+                        </li>
+                        <hr/>
+                        {% endfor %}
+                    </ul>
+                    {% endfor %}
+                    <button class="btn btn-dark btn-lg">اعمال</button>
+                </form>
+              </blockquote>
+            </div>
+        </div>  
+    </div>
+    <div class="col-md-7">
+        <div class="row">
+            {% if doctors %}
+                {% for doctor in doctors %}
+                    {% if doctor.name and doctor.family and doctor.doctor_resume and doctor.doctor_shift and not doctor.is_blocked%}
+                        <div class="col-md-12">
+                            <div class="card doctor-card m-2 animate__animated animate__fadeInDown">
+                                <div class="card-header text-center doctor-card-title">
+                                    <h2>{{doctor.name}} {{doctor.family}}</h2>
+                                </div>
+                                <div class="card-body">
+                                    <div class="text-end">
+                                    <div class="text-start">
+                                        {% if doctor.profile_img %}
+                                            <img src="{{doctor.profile_img.url}}" class="doctor-profile" alt="{{doctor.name}} {{doctor.family}}">
+                                        {% else %}
+                                        <img src="{% static 'core/assets/images/doctor-profile.jpg' %}" class="doctor-profile" alt="">
+                                        {% endif %}
+                                    </div>
+                                    <div class="modal">
+                                        <!-- Shift Modal content -->
+                                        <div class="modal-content">
+                                        <span class="close">&times;</span>
+                                        <p id="modal-content"></p>
+                                    </div>
+                                    
+                                    </div> 
+                                    <div class="doctor-card-content">
+                                    {% for category in doctor.categories.all %}
+                                    <span class="badge bg-danger">{{category.sub_category_name}}</span>  
+                                    {% endfor %}
+                                    {% if doctor.categories.all  %}
+                                    <span> : تخصص ها</span>
+                                    {% endif %}
+                                    </div>
+                                    <p></p>
+                                    <div class="text-end">
+                                        <button class="btn btn-primary button" id="resume-btn" onclick="showModal('{{doctor.doctor_resume}}')">رزومه</button>
+                                        <button class="btn btn-warning button" id="shift-btn" onclick="showModal('{{doctor.doctor_shift}}')">شیفت کاری</button>
+                                        <a href="" class="btn btn-success button">درخواست نوبت</a>
+                                    </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            {% else %}
+            <div class="alert alert-warning">دکتری وجود ندارد</div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+
+{% block scripts %}
+<script src="{% static 'core/assets/js/doctors.js' %}"></script>
+
+{% endblock %}

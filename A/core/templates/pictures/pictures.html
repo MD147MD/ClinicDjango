@@ -1,0 +1,22 @@
+{% extends 'layouts/core/core_base.html'%}
+{% load static %}
+
+
+{% block title %}
+عکس ها
+{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-4">
+        <div class="card">
+            <img class="card-img-top" src="{% static 'core/assets/images/doctor-picture.jpg' %}" alt="Card image cap">
+            <div class="card-body">
+            <h3 class="card-text text-center">عکس تستی</h3>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+

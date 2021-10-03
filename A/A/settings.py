@@ -41,7 +41,11 @@ INSTALLED_APPS = [
     'accounts.apps.AccountsConfig',
     'siteSettings.apps.SitesettingsConfig',
     'pictures.apps.PicturesConfig',
-    'administration.apps.AdministrationConfig'
+    'administration.apps.AdministrationConfig',
+    'core.apps.CoreConfig',
+    # -- >
+    # Third Party Apps < --
+    'ckeditor',
     # -- >
 ]
 
@@ -140,4 +144,16 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Custom User Config < -- 
 AUTH_USER_MODEL = "accounts.User" 
+# -- >
+
+# Ckeditor Configuration < --
+LANGUAGE_CODE = 'fa'
+CKEDITOR_CONFIGS = {
+    'default': {
+        'toolbar': 'full',
+        'width' : '100%',
+    },
+    'defaultLanguage':'fa',
+    'language':'fa'
+}
 # -- >

@@ -13,11 +13,14 @@
 {% include 'layouts/administration/includes/side.html' %} 
   <div class="content-wrapper">
 {% include 'layouts/administration/includes/content-header.html' %} 
+  <section class="content">
     {% block content %}{% endblock %}
+  </section>
   </div>
 </div>
 
 {% include 'layouts/administration/includes/scripts.html' %} 
+
 {% block scripts %}{% endblock %}
 </body>
 </html>

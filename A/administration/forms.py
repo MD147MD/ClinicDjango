@@ -3,3 +3,4 @@ from .administration_forms.addRole import AddRoleForm
 from .administration_forms.addPicture import AddPictureForm
 from .administration_forms.addCategory import AddCategoryForm
 from .administration_forms.addSubCategory import AddSubCategoryForm
+from .administration_forms.siteSettings import SiteSettingsForm
