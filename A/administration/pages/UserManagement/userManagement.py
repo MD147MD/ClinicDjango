@@ -33,6 +33,7 @@ class UserManagement(View):
         edit_user_permission_code = 12
         block_user_permission_code = 13
         see_user_actions_permission_code = 14
+        see_user_appointments_permission_code = 15
         return render(request,"user-management/user-management.html",{
             "section":"مدیریت کاربران",
             "page":"دیدن کاربران",
@@ -48,6 +49,7 @@ class UserManagement(View):
             "page_range":range(min_page,max_page + 1),
             "can_edit_user":request.user.has_permission(edit_user_permission_code),
             "can_block_user":request.user.has_permission(block_user_permission_code),
-            "can_see_user_actions":request.user.has_permission(see_user_actions_permission_code)
+            "can_see_user_actions":request.user.has_permission(see_user_actions_permission_code),
+            "can_see_user_appointments":request.user.has_permission(see_user_appointments_permission_code)
         })
 

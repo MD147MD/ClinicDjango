@@ -14,12 +14,42 @@
     <div class="container">
         <div class="login-container">
                 <div>
-                    <a class="btn btn-info" href="/">بازگشت به صحفه اصلی</a>
-                 </div>
-                <img src="{% static 'core/assets/images/doctor-profile.jpg' %}" class="avatar" alt="">
+                    <a class="btn btn-primary" href="/">بازگشت به صحفه اصلی</a>
+                </div>
+                <p></p>
+                {% include "layouts/core/includes/messages.html"%}
+                {% if form.errors %}
+                <div class="alert alert-danger">
+                    <ul>
+                    {% for field in form %}
+                        {% for error in field.errors %} 
+                            <li>{{error}}</li>
+                        {% endfor %}
+                    {% endfor %}
+                    </ul>
+                </div>
+                {% endif %}
+                {% if request.user.profile_img %}
+                    <img src="{{request.user.profile_img.url}}" class="avatar" alt="">
+                {% else %}
+                    <img src="{% static 'core/assets/images/doctor-profile.jpg' %}" class="avatar" alt="">
+                {% endif %}
                 <div class="form-box">
-                    <form action="" method="">
-                        <input type="text" placeholder="نام"/>                        
+                    <form method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        {{form.name}}
+                        {{form.family}}
+                        {{form.age}}
+                        <input value="{{request.user.phone_number}}" disabled/>
+                        {{form.email}}
+                        <p></p>
+                        <label class="btn btn-warning" type="button" for="profile_img">تغییر عکس پروفایل</label>                
+                        <p></p>
+                        {{form.profile_img}}
+                        {% if is_doctor %}
+                            {{form.doctor_shift}}
+                            {{form.doctor_resume}}
+                        {% endif %}
                         <button class="btn btn-info btn-block login" type="submit">ذخیره</button>
                     </form>
                 </div>

@@ -7,16 +7,19 @@
 {% endblock %}
 
 {% block content %}
-<div class="row">
-    <div class="col-md-4">
-        <div class="card">
-            <img class="card-img-top" src="{% static 'core/assets/images/doctor-picture.jpg' %}" alt="Card image cap">
-            <div class="card-body">
-            <h3 class="card-text text-center">عکس تستی</h3>
+{% if pictures %}
+    <div class="row">
+        {% for image in pictures %}
+        <div class="col-md-4">
+            <div class="card m-2">
+                <img class="card-img-top" src="{{image.picture.url}}" alt="{{image.picture_title}}">
+                <div class="card-body">
+                <h3 class="card-text text-center">{{image.picture_title}}</h3>
+                </div>
             </div>
         </div>
+        {% endfor %}
     </div>
-</div>
-
+{% endif %}
 {% endblock %}
 

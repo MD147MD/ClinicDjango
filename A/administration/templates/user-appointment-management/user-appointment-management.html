@@ -1,0 +1,121 @@
+{% extends 'layouts/administration/administration_base.html' %}
+{% load static %}
+{% load jalali %}
+
+{% block content %}
+
+    <h1>بخش مدیریت نوبت ها</h1>
+    <hr/>
+    {% include "layouts/administration/includes/messages.html" %}
+    {% if can_add_appointment %}
+    <div class="text-center">
+        <a class="btn btn-primary" href="{% url 'administration:add-user-appointment' user.id %}">افزودن نقش
+            <i class="fa fa-plus-square" aria-hidden="true"></i>
+        </a>
+    </div>
+    <p></p>
+    {% endif %}
+    {% if appointments %}
+    <div class="box">
+        <div class="box-header">
+          <h3 class="box-title">لیست نوبت ها</h3>
+
+          <form class="box-tools">
+            <div class="input-group input-group-sm" style="width: 150px;">
+              <input type="text" name="search" class="form-control pull-right" placeholder="جستجو" value="{{search}}">
+
+              <div class="input-group-btn">
+                <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+              </div>
+            </div>
+          </form>
+        </div>
+        <!-- /.box-header -->
+        <div class="box-body table-responsive no-padding">
+            <table class="table table-hover">
+                <tbody>
+                    <tr>
+                        <th>نام دکتر مربوطه</th>
+                        <th>شماره تلفن دکتر مربوطه</th>
+                        <th>استفاده شده</th>
+                        <th>تاریخ ثبت</th>
+                        <th>دستورات</th>
+                    </tr>
+                    {% for appointment in appointments %}
+                    <tr>
+                        <td>
+                            {% if appointment.doctor.name %}
+                                {{appointment.doctor.name}}
+                            {% else %}
+                            _
+                            {% endif %}
+                            {% if appointment.doctor.family %}
+                                {{appointment.doctor.family}}
+                            {% else %}
+                            _
+                            {% endif %}
+                        </td>
+                        <td>
+                            {{appointment.doctor.phone_number}}
+                        </td>
+                        <td>
+                            {% if appointment.used %}
+                            <p class="text-success">
+                                <i class="fa fa-check-square" aria-hidden="true"></i>
+                            </p>
+                            {% else %} 
+                            <p class="text-danger">
+                                <i class="fa fa-window-close" aria-hidden="true"></i>
+                            </p>
+                            {% endif %}
+                        </td>
+                        <td>
+                           {{appointment.created_at|tojalali}}
+                        </td>
+                        <td>
+                            {% if can_edit_appointment %}
+                                <a class="btn btn-{% if appointment.used %}danger{% else %}success{% endif %}" href="{% url 'administration:edit-role' appointment.id %}" title="تغییر به عنوان استفاده شده/نشده">
+                                    {% if appointment.used %}
+                                        <i class="fa fa-window-close" aria-hidden="true"></i>
+                                    {% else %}
+                                        <i class="fa fa-check-square" aria-hidden="true"></i>
+                                    {% endif %}
+                                </a>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+      </div>
+    {% if page_count > 1 %}
+        <div class="text-center">
+            <br/>
+            <div class="box-tools">
+                <ul class="pagination pagination-sm no-margin ">
+                    {% if has_previous %}
+                        <li class="paginate_button"><a href="{{request.path}}?page={{current_page|add:-1}}&search={{search}}"> &lt;&lt;</a></li>
+                    {% endif %}
+                    {% for page in page_range %}
+                        {% if page == current_page %}
+                            <li class="paginate_button active"><a>{{page}}</a></li>
+                        {% else %}
+                            <li class="paginate_button"><a href="{{request.path}}?page={{page}}&search={{search}}">{{page}}</a></li>
+                        {% endif %}
+                    {% endfor %}
+                    {% if has_next %}
+                        <li class="paginate_button"><a href="{{request.path}}?page={{current_page|add:1}}&search={{search}}">>></a></li>
+                    {% endif %}
+                </ul>
+            </div>
+                
+        </div>
+    {% endif %}
+    {% else %}
+    <div class="alert alert-warning">نوبتی وجود ندارد
+        <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+    </div>
+    {% endif %}
+
+{% endblock %}

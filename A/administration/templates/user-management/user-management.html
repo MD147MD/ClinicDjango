@@ -77,10 +77,17 @@
                                 </a>
                             {% endif %}
                             {% if can_see_user_actions %}
-                                <a class="btn btn-info" href="{% url 'administration:user-actions' user.id %}" title="فعالیت ها">
+                                <a class="btn btn-primary" href="{% url 'administration:user-actions' user.id %}" title="فعالیت ها">
                                     <i class="fa fa-info" aria-hidden="true"></i>
                                 </a>
                             {% endif %}
+
+                            {% if can_see_user_appointments %}
+                                <a class="btn btn-success" href="{% url 'administration:user-appointments' user.id %}" title="نوبت ها">
+                                    <i class="fa fa-id-card" aria-hidden="true"></i>
+                                </a>
+                            {% endif %}
+
                             {% if can_block_user %}
                                 {% if user.is_blocked %}
                                     <a class="btn btn-success" href="{% url 'administration:block-user' user.id %}" title="آن بلاک">

@@ -5,8 +5,9 @@ from accounts.models import User,Category,SubCategory,UserLoginAttempt
 from django.db.models import Q
 from django.contrib.auth import logout,login,authenticate
 from django.contrib import messages
-from .forms import LoginForm,VerifyPhoneForm
+from .forms import LoginForm,VerifyPhoneForm,EditUserForm
 from random import randint
+from pictures.models import ClinicPicture
 
 
 class Home(View):
@@ -95,13 +96,51 @@ class Doctors(View):
 class UserPanel(View):
     
     def get(self,request,*args,**kwargs):
-        return render(request,'user-panel/user-panel.html')
+        # I know that i can use "Login Required"
+        if not request.user.is_authenticated:
+            return redirect('/404')
+        doctor_permission_code = 50
+        return render(request,'user-panel/user-panel.html',{
+            "form":EditUserForm(initial={
+                "name":request.user.name,
+                "family":request.user.family,
+                "email":request.user.email,
+                "age":request.user.age,
+                "doctor_shift":request.user.doctor_shift,
+                "doctor_resume":request.user.doctor_resume,
+            }),
+            "is_doctor":request.user.has_permission(doctor_permission_code),
+        })
+    
+    def post(self,request,*args,**kwargs):
+        if not request.user.is_authenticated:
+            return redirect('/404')
+        form = EditUserForm(request.POST,request.FILES)
+        if form.is_valid():
+            user = request.user
+            cd = form.cleaned_data
+            user.name = cd['name']
+            user.family = cd['family']
+            user.email = cd['email']
+            user.age = cd['age']
+            user.profile_img = cd['profile_img'] if cd['profile_img'] else user.profile_img
+            user.doctor_resume = cd['doctor_resume']
+            user.doctor_shift = cd['doctor_shift']
+            user.save()
+            messages.success(request,"اطلاعات شما با موفقیت ویرایش شد","success")
+        doctor_permission_code = 50
+        return render(request,'user-panel/user-panel.html',{
+            "form":form,
+            "is_doctor":request.user.has_permission(doctor_permission_code),
+        })
+
 
 
 class Pictures(View):
 
     def get(self,request,*args,**kwargs):
-        return render(request,'pictures/pictures.html')
+        pictures = ClinicPicture.objects.all()
+        return render(request,'pictures/pictures.html',{'pictures':pictures})
     
 
 class ContactUs(View):

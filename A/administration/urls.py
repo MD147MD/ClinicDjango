@@ -10,6 +10,7 @@ urlpatterns = [
     path('edit-user/<str:user_id>',views.EditUser.as_view(),name="edit-user"),    
     path('block-user/<str:user_id>',views.BlockUser.as_view(),name="block-user"),    
     path('user-actions/<str:user_id>',views.UserActions.as_view(),name="user-actions"),
+    path('user-appointments/<str:user_id>',views.UserAppointments.as_view(),name="user-appointments"),
     # ====================================
     path('role-management/',views.RoleManagement.as_view(),name="role-management"),    
     path('add-role/',views.AddRole.as_view(),name="add-role"),    
