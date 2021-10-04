@@ -18,6 +18,9 @@ def administration_context_processor(request):
     # --------------
 
     if user.is_authenticated:
+        see_admin_panel_permission_code = 1
+        can_see_admin_panel = user.has_permission(see_admin_panel_permission_code)
+        # -------------
         see_users_permission_code = 10
         can_see_users = user.has_permission(see_users_permission_code)
         # --------------
@@ -41,12 +44,13 @@ def administration_context_processor(request):
         # --------------
 
     return {
-        "can_see_users":can_see_users,
-        "can_see_roles":can_see_roles,
-        "can_add_role":can_add_role,
-        "can_see_categories":can_see_categories,
-        "can_add_category":can_add_category,
-        "can_see_pictures":can_see_pictures,
-        "can_add_picture":can_add_picture,
-        "can_edit_site_settings":can_edit_site_settings
+        "can_see_admin_panel":request.user.is_authenticated and can_see_admin_panel,
+        "can_see_users":request.user.is_authenticated and can_see_users,
+        "can_see_roles":request.user.is_authenticated and can_see_roles,
+        "can_add_role":request.user.is_authenticated and can_add_role,
+        "can_see_categories":request.user.is_authenticated and can_see_categories,
+        "can_add_category":request.user.is_authenticated and can_add_category,
+        "can_see_pictures":request.user.is_authenticated and can_see_pictures,
+        "can_add_picture":request.user.is_authenticated and can_add_picture,
+        "can_edit_site_settings":request.user.is_authenticated and can_edit_site_settings
     }

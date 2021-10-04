@@ -20,9 +20,9 @@ class UserManagement(View):
         users = []
 
         if search:
-            users = User.objects.filter(Q(phone_number__icontains=search) | Q(name__icontains=search) | Q(family__icontains=search))
+            users = User.objects.filter(Q(phone_number__icontains=search) | Q(name__icontains=search) | Q(family__icontains=search)).order_by("-id")
         else:
-            users = User.objects.all()
+            users = User.objects.all().order_by("-id")
         
         user_pages = Paginator(users, 10)
         page_count = user_pages.num_pages

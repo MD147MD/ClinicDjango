@@ -33,8 +33,9 @@ month = {
 def tojalali(value):
     date = JalaliDateTime(value)
     minute = date.minute if len(str(date.minute)) == 2 else f"۰{date.minute}"
+    hour = date.hour if len(str(date.hour)) == 2 else f"۰{date.hour}"
     day = date.day if len(str(date.day)) == 2 else f"۰{date.day}"
-    value = f"{week[date.weekday()]} {day} {month[date.month]} {date.year} ساعت {minute} : {date.hour}"
+    value = f"{week[date.weekday()]} {day} {month[date.month]} {date.year} ساعت {minute} : {hour}"
     return value
 
 

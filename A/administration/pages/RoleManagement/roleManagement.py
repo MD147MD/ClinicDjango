@@ -19,9 +19,9 @@ class RoleManagement(View):
         roles = []
 
         if search:
-            roles = Role.objects.filter(role_name__icontains=search)
+            roles = Role.objects.filter(role_name__icontains=search).order_by("-id")
         else:
-            roles = Role.objects.all()
+            roles = Role.objects.all().order_by("-id")
         
         role_pages = Paginator(roles, 10)
         page_count = role_pages.num_pages

@@ -12,6 +12,8 @@ secure_urls = [
     {'url':'block-user','permission_code':13},
     {'url':'user-actions','permission_code':14},
     {'url':'user-appointments','permission_code':15},
+    {'url':'add-user-appointment','permission_code':16},
+    {'url':'edit-user-appointment','permission_code':17},
     # ===========================================
     {'url':'role-management','permission_code':20},
     {'url':'add-role','permission_code':21},

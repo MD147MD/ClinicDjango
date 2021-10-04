@@ -9,7 +9,7 @@
     {% include "layouts/administration/includes/messages.html" %}
     {% if can_add_appointment %}
     <div class="text-center">
-        <a class="btn btn-primary" href="{% url 'administration:add-user-appointment' user.id %}">افزودن نقش
+        <a class="btn btn-primary" href="{% url 'administration:add-user-appointment' user.id %}">افزودن نوبت
             <i class="fa fa-plus-square" aria-hidden="true"></i>
         </a>
     </div>
@@ -74,7 +74,7 @@
                         </td>
                         <td>
                             {% if can_edit_appointment %}
-                                <a class="btn btn-{% if appointment.used %}danger{% else %}success{% endif %}" href="{% url 'administration:edit-role' appointment.id %}" title="تغییر به عنوان استفاده شده/نشده">
+                                <a class="btn btn-{% if appointment.used %}danger{% else %}success{% endif %}" href="{% url 'administration:edit-user-appointment' appointment.id %}" title="تغییر به عنوان استفاده شده/نشده">
                                     {% if appointment.used %}
                                         <i class="fa fa-window-close" aria-hidden="true"></i>
                                     {% else %}

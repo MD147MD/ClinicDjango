@@ -1,0 +1,77 @@
+{% extends 'layouts/administration/administration_base.html' %}
+{% load static %}
+{% load jalali %}
+
+{% block content %}
+
+    <h1>بخش فعالیت های کاربر</h1>
+    <hr/>
+    {% if attempts %}
+    <div class="box">
+        <div class="box-header">
+          <h3 class="box-title">لیست ورود های کاربر </h3>
+        </div>
+        <!-- /.box-header -->
+        <div class="box-body table-responsive no-padding">
+            <table class="table table-hover">
+                <tbody>
+                    <tr>
+                        <th>زمان</th>
+                        <th>آی پی</th>
+                        <th>موفق</th>
+                    </tr>
+                    {% for attempt in attempts %}
+                    <tr>
+                        <td>
+                            {{attempt.created_at|tojalali}}
+                        </td>
+                        <td>
+                           {{attempt.ip}}
+                        </td>
+                        <td>
+                            {% if attempt.used %}
+                                <p class="text-success">
+                                    <i class="fa fa-check-circle" aria-hidden="true"></i>
+                                </p>
+                            {% else %}
+                                <p class="text-danger">
+                                    <i class="fa fa-times-circle" aria-hidden="true"></i>
+                                </p>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+      </div>
+    {% if page_count > 1 %}
+        <div class="text-center">
+            <br/>
+            <div class="box-tools">
+                <ul class="pagination pagination-sm no-margin ">
+                    {% if has_previous %}
+                        <li class="paginate_button"><a href="{{request.path}}?page={{current_page|add:-1}}"> &lt;&lt;</a></li>
+                    {% endif %}
+                    {% for page in page_range %}
+                        {% if page == current_page %}
+                            <li class="paginate_button active"><a>{{page}}</a></li>
+                        {% else %}
+                            <li class="paginate_button"><a href="{{request.path}}?page={{page}}">{{page}}</a></li>
+                        {% endif %}
+                    {% endfor %}
+                    {% if has_next %}
+                        <li class="paginate_button"><a href="{{request.path}}?page={{current_page|add:1}}">>></a></li>
+                    {% endif %}
+                </ul>
+            </div>
+                
+        </div>
+    {% endif %}
+    {% else %}
+    <div class="alert alert-warning">فعالیتی وجود ندارد
+        <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+    </div>
+    {% endif %}
+
+{% endblock %}

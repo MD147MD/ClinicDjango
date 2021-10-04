@@ -8,6 +8,7 @@ from django.contrib import messages
 from .forms import LoginForm,VerifyPhoneForm,EditUserForm
 from random import randint
 from pictures.models import ClinicPicture
+from A.sms_sender import send_sms
 
 
 class Home(View):
@@ -26,12 +27,13 @@ class Login(View):
     def post(self,request,*args,**kwargs):
         form = LoginForm(request.POST)
         if form.is_valid():
-            # TODO : SEND SMS TO USER
+            code = randint(100000,999999)
             phone_number = form.cleaned_data["phone_number"]
+            send_sms(phone_number,f"کد فعالسازی شما در وبسایت درمانگاه فرهنگیان کوهدشت {code} میباشد")
             user = User.objects.filter(phone_number=phone_number).first()
             if not user:
                 user = User.objects.create(phone_number=phone_number)
-            UserLoginAttempt.objects.create(user=user,code=randint(100000,999999),ip=get_client_ip(request))
+            UserLoginAttempt.objects.create(user=user,code=code,ip=get_client_ip(request))
             messages.success(request,"کد راستی آزمایی برای شما ارسال شد","warning")
             request.session["phone_number"] = phone_number
             return redirect("core:verify-phone")

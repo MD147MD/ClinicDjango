@@ -5,6 +5,8 @@ from .pages.UserManagement.blockUser import BlockUser
 from .pages.UserManagement.editUser import EditUser
 from .pages.UserManagement.userActions import UserActions
 from .pages.UserManagement.userAppointments import UserAppointments
+from .pages.UserManagement.addUserAppointment import AddUserAppointment
+from .pages.UserManagement.editUserAppointment import EditUserAppointment
 # ========================================================
 from .pages.RoleManagement.roleManagement import RoleManagement
 from .pages.RoleManagement.add_role import AddRole

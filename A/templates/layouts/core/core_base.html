@@ -22,6 +22,9 @@
         {% if request.user.is_authenticated %}
         <button class="nav-button"><a href="{% url 'core:logout' %}" class="button-href"> خروج</a></button>
         <button class="nav-button"><a href="{% url 'core:user-panel' %}" class="button-href">حساب کاربری</a></button>
+        {% if can_see_admin_panel %}
+            <button class="nav-button"><a href="{% url 'administration:index' %}" class="button-href">پنل مدیریت</a></button>
+        {% endif %}
         {% else %}
         <button class="nav-button"><a href="{% url 'core:login' %}" class="button-href">ورود به حساب کاربری</a></button>
         {% endif %}
