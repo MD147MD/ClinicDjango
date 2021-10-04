@@ -1,0 +1,45 @@
+{% extends 'layouts/administration/administration_base.html' %}
+{% load static %}
+{% load jalali%}
+
+{% block content %}
+
+    <h1>بخش لاگ اس ام اس ها</h1>
+    <hr/>
+    {% include "layouts/administration/includes/messages.html" %}
+    <div class="box">
+        <div class="box-header">
+          <h3 class="box-title">لیست لاگ ها</h3>
+
+          <!-- <form class="box-tools">
+            <div class="input-group input-group-sm" style="width: 150px;">
+              <input type="text" name="search" class="form-control pull-right" placeholder="جستجو" value="{{search}}">
+
+              <div class="input-group-btn">
+                <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+              </div>
+            </div>
+          </form> -->
+        </div>
+        <!-- /.box-header -->
+        <div class="box-body table-responsive no-padding">
+            <table class="table table-hover">
+                <tbody id="log-container">
+                    <tr>
+                        <th>شماره کاربر</th>
+                        <th>کد اس ام اس</th>
+                        <th>آیپی</th>
+                        <th>موفقیت آمیز بوده</th>
+                        <th>تاریخ ثبت</th>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+      </div>
+
+{% endblock %}
+
+
+{% block scripts %}
+<script src="{% static 'administration/sms-logs.js' %}"></script>
+{% endblock %}

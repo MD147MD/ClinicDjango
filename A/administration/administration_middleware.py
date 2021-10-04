@@ -33,6 +33,8 @@ secure_urls = [
     {'url':'edit-sub-category','permission_code':42},
     {'url':'remove-sub-category','permission_code':43},
     # ===========================================
+    {'url':'sms-logs','permission_code':71},
+
 ]
 
 

@@ -1,5 +1,7 @@
 from django.urls import path
 from . import views
+from django.urls import re_path
+from . import consumers
 
 app_name = 'administration'
 
@@ -34,4 +36,10 @@ urlpatterns = [
     # ====================================
     path('edit-site-settings/',views.EditSiteSettings.as_view(),name="edit-site-settings"),    
     # ====================================
+    path('sms-logs/',views.SmsLogs.as_view(),name="sms-logs"),    
+    # ====================================
+]
+
+websocket_urlpatterns = [
+        path('ws/logs/sms-logs/', consumers.DataConsumer.as_asgi()),
 ]

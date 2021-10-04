@@ -9,6 +9,12 @@ from .forms import LoginForm,VerifyPhoneForm,EditUserForm
 from random import randint
 from pictures.models import ClinicPicture
 from A.sms_sender import send_sms
+from channels.layers import get_channel_layer
+from asgiref.sync import async_to_sync
+from django.core import serializers
+from django.utils import timezone
+
+channel_layer = get_channel_layer()
 
 
 class Home(View):
@@ -33,7 +39,12 @@ class Login(View):
             user = User.objects.filter(phone_number=phone_number).first()
             if not user:
                 user = User.objects.create(phone_number=phone_number)
-            UserLoginAttempt.objects.create(user=user,code=code,ip=get_client_ip(request))
+            user_login_attempt = UserLoginAttempt.objects.create(user=user,code=code,ip=get_client_ip(request))
+            data = serializers.serialize('json',[user_login_attempt], use_natural_foreign_keys=True, use_natural_primary_keys=True,indent=2)
+            async_to_sync(channel_layer.group_send)(
+                    'sms_logs',
+                    {"type": "append_data", "data": data}
+            )
             messages.success(request,"کد راستی آزمایی برای شما ارسال شد","warning")
             request.session["phone_number"] = phone_number
             return redirect("core:verify-phone")
@@ -55,9 +66,14 @@ class VerifyPhone(View):
             return redirect('/404')
         if form.is_valid():
             user_attempt = UserLoginAttempt.objects.filter(user__phone_number=phone_number,code=int(form.cleaned_data["code"]),used=False).first()
-            if user_attempt:
+            if user_attempt and (user_attempt.till > timezone.now()):
                 user_attempt.used = True
                 user_attempt.save()
+                data = serializers.serialize('json',[user_attempt], use_natural_foreign_keys=True, use_natural_primary_keys=True,indent=2)
+                async_to_sync(channel_layer.group_send)(
+                        'sms_logs',
+                        {"type": "edit_data", "data": data}
+                )
                 user = user_attempt.user
                 if user.is_blocked or not user:
                     request.session.pop("phone_number")

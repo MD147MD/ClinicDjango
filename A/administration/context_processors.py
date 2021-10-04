@@ -42,6 +42,12 @@ def administration_context_processor(request):
         edit_settings_permission_code = 2
         can_edit_site_settings = user.has_permission(edit_settings_permission_code)
         # --------------
+        see_sms_logs = 70
+        see_sms_logs_permission_code = 71   
+        can_see_sms_logs = user.has_permission(see_sms_logs_permission_code)
+        can_see_logs = user.has_permission(see_sms_logs)
+        # --------------
+        
 
     return {
         "can_see_admin_panel":request.user.is_authenticated and can_see_admin_panel,
@@ -52,5 +58,7 @@ def administration_context_processor(request):
         "can_add_category":request.user.is_authenticated and can_add_category,
         "can_see_pictures":request.user.is_authenticated and can_see_pictures,
         "can_add_picture":request.user.is_authenticated and can_add_picture,
-        "can_edit_site_settings":request.user.is_authenticated and can_edit_site_settings
+        "can_edit_site_settings":request.user.is_authenticated and can_edit_site_settings,
+        "can_see_sms_logs":request.user.is_authenticated and can_see_sms_logs,
+        "can_see_logs":request.user.is_authenticated and can_see_logs
     }

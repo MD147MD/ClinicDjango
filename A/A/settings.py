@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     # -- >
     # Third Party Apps < --
     'ckeditor',
+    'channels',
     # -- >
 ]
 
@@ -160,4 +161,16 @@ CKEDITOR_CONFIGS = {
 
 # Configuring Kavenegar (SMS Service) < --
 KAVENEGAR_KEY = "57684936322F675835516E55706D693365786A306256716E736A614172386D673073617867794B3646674D3D"
+# -- >
+
+# Configuring Channels < --
+ASGI_APPLICATION = "A.asgi.application"
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',
+        'CONFIG': {
+            "hosts": [('127.0.0.1', 6379)],
+        },
+    },
+}
 # -- >

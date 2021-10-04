@@ -28,4 +28,6 @@ from .pages.PictureManagement.remove_picture import RemovePicture
 # ========================================================
 from .pages.SiteSettings.edit_site_settings import EditSiteSettings
 # ========================================================
+from .pages.Logs.smsLogs import SmsLogs
+# ========================================================
 

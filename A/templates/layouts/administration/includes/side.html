@@ -18,6 +18,19 @@
       <ul class="sidebar-menu" data-widget="tree">
         <li class="header">منو</li>
 
+        {% if can_see_logs %}
+          <li class="active treeview">
+            <a href="">
+              <i class="fa fa-users"></i> <span>لاگ ها</span>
+            </a>
+            <ul class="treeview-menu">
+              {% if can_see_sms_logs %}
+                <li><a href="{% url 'administration:sms-logs' %}"><i class="fa fa-circle-o"></i> دیدن لاگ اس ام اس ها</a></li>
+              {% endif %}
+            </ul>
+          </li>
+        {% endif %}
+
         {% if can_see_users %}
           <li class="active treeview">
             <a href="">
