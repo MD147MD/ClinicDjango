@@ -22,9 +22,9 @@ class UserAppointments(View):
         appointments = []
 
         if search:
-            appointments = user.user_appointments.filter(Q(doctor__name__icontains=search) | Q(doctor__family__icontains=search) | Q(doctor__phone_number__icontains=search)).order_by("-id")
+            appointments = user.user_appointments.filter(Q(doctor__name__icontains=search) | Q(doctor__family__icontains=search) | Q(doctor__phone_number__icontains=search)).order_by("-created_at")
         else:
-            appointments = user.user_appointments.all().order_by("-id")
+            appointments = user.user_appointments.all().order_by("-created_at")
         
         appointment_pages = Paginator(appointments, 10)
         page_count = appointment_pages.num_pages

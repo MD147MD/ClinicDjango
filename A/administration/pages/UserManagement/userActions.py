@@ -22,7 +22,7 @@ class UserActions(View):
         except:
             page = 1
 
-        attempts = UserLoginAttempt.objects.filter(user=user).order_by("-id")
+        attempts = UserLoginAttempt.objects.filter(user=user).order_by("-created_at")
         attempt_pages = Paginator(attempts, 10)
         page_count = attempt_pages.num_pages
         page = page if page <= page_count else 1

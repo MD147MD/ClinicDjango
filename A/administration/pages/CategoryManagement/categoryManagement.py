@@ -19,9 +19,9 @@ class CategoryManagement(View):
         categories = []
 
         if search:
-            categories = Category.objects.filter(category_name__icontains=search).order_by("-id")
+            categories = Category.objects.filter(category_name__icontains=search).order_by("-created_at")
         else:
-            categories = Category.objects.all().order_by("-id")
+            categories = Category.objects.all().order_by("-created_at")
         
         category_pages = Paginator(categories, 10)
         page_count = category_pages.num_pages

@@ -1,6 +1,6 @@
 {% extends 'layouts/administration/administration_base.html' %}
 {% load static %}
-
+{% load jalali %}
 
 {% block content %}
 
@@ -36,6 +36,7 @@
                 <tbody>
                     <tr>
                         <th>نام دسته</th>
+                        <th>تاریخ ثبت</th>
                         <th>زیردسته ها</th>
                         <th>دستورات</th>
                     </tr>
@@ -44,6 +45,7 @@
                         <td>
                             {{category.category_name}}
                         </td>
+                        <td>{{category.created_at|tojalali}}</td>
                         <td>
                             <ul>
                                 {% for sub_category in category.sub_categories.all %}

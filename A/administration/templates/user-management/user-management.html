@@ -1,5 +1,6 @@
 {% extends 'layouts/administration/administration_base.html' %}
 {% load static %}
+{% load jalali%}
 
 {% block styles %}
 <link rel="stylesheet" href="{% static 'administration/user-management.css' %}">
@@ -33,6 +34,7 @@
                         <th>پروفایل</th>
                         <th>نام</th>
                         <th>نام خانوادگی</th>
+                        <th>تاریخ ثبت</th>
                         <th>شماره تلفن</th>
                         <th>بلاک شده</th>
                         <th>دستورات</th>
@@ -60,6 +62,7 @@
                             _
                             {% endif %}
                         </td>
+                        <td>{{user.created_at|tojalali}}</td>
                         <td>{{user.phone_number}}</td>
                         <td>
                             <span class="badge">

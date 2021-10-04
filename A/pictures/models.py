@@ -9,7 +9,7 @@ class ClinicPicture(models.Model):
     picture = models.ImageField(null=True,blank=True)
     objects = MainManager()
     is_removed = models.BooleanField(default=False)
-    craeted_at = models.DateTimeField(auto_now_add=True)
+    created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return self.picture_title

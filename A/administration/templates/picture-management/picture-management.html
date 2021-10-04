@@ -1,6 +1,6 @@
 {% extends 'layouts/administration/administration_base.html' %}
 {% load static %}
-
+{% load jalali %}
 
 {% block content %}
 
@@ -38,12 +38,16 @@
                 <tbody>
                     <tr>
                         <th>موضوع عکس</th>
+                        <th>تاریخ ثبت</th>
                         <th>دستورات</th>
                     </tr>
                     {% for picture in pictures %}
                     <tr>
                         <td>
                             {{picture.picture_title}}
+                        </td>
+                        <td>
+                            {{picture.created_at|tojalali}}
                         </td>
                         <td>
                             {% if can_edit_picture %}

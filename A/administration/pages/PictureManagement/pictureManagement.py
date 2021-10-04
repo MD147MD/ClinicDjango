@@ -19,9 +19,9 @@ class PictureManagement(View):
         pictures = []
 
         if search:
-            pictures = ClinicPicture.objects.filter(picture_title__icontains=search).order_by("-id")
+            pictures = ClinicPicture.objects.filter(picture_title__icontains=search).order_by("-created_at")
         else:
-            pictures = ClinicPicture.objects.all().order_by("-id")
+            pictures = ClinicPicture.objects.all().order_by("-created_at")
         
         picture_pages = Paginator(pictures, 10)
         page_count = picture_pages.num_pages
