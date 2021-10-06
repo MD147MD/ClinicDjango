@@ -124,6 +124,7 @@ class UserPanel(View):
                 "family":request.user.family,
                 "email":request.user.email,
                 "age":request.user.age,
+                'doctor_visit_cost':request.user.doctor_visit_cost,
                 "doctor_shift":request.user.doctor_shift,
                 "doctor_resume":request.user.doctor_resume,
             }),
@@ -142,6 +143,7 @@ class UserPanel(View):
             user.email = cd['email']
             user.age = cd['age']
             user.profile_img = cd['profile_img'] if cd['profile_img'] else user.profile_img
+            user.doctor_visit_cost = cd['doctor_visit_cost']
             user.doctor_resume = cd['doctor_resume']
             user.doctor_shift = cd['doctor_shift']
             user.save()

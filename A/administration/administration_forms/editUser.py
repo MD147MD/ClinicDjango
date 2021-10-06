@@ -42,7 +42,7 @@ class EditUserForm(forms.Form):
     try:
         # categories = forms.MultipleChoiceField(required=False,widget=forms.SelectMultiple(attrs={"class":"form-control"}),
         # choices=SubCategory.objects.all().values_list("id","sub_category_name"))
-        categories = forms.ModelMultipleChoiceField(queryset=SubCategory.objects.all(),widget=forms.SelectMultiple(attrs={"class":"form-control"}))
+        categories = forms.ModelMultipleChoiceField(required=False,queryset=SubCategory.objects.all(),widget=forms.SelectMultiple(attrs={"class":"form-control"}))
     except:
         categories = None
 

@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     # Local Apps < -- 
+    'django.contrib.humanize',
     'accounts.apps.AccountsConfig',
     'siteSettings.apps.SitesettingsConfig',
     'pictures.apps.PicturesConfig',

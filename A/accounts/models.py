@@ -117,6 +117,7 @@ class UserAppointment(models.Model):
     doctor = models.ForeignKey(User,on_delete=models.CASCADE,related_name='doctor_appointments',null=True,blank=True)
     user = models.ForeignKey('User',on_delete=models.CASCADE,related_name='user_appointments',null=True,blank=True)
     used = models.BooleanField(default=False)
+    paid_cost = models.PositiveIntegerField(null=True,blank=True)
     is_paid = models.BooleanField(default=False)
     is_removed = models.BooleanField(default=False)
     objects = MainManager()

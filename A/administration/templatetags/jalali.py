@@ -1,5 +1,7 @@
 from django import template
 from persiantools.jdatetime import JalaliDateTime
+from django.contrib.humanize.templatetags.humanize import intcomma
+
 
 register = template.Library()
 
