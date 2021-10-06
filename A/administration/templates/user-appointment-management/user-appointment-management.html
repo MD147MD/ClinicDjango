@@ -37,6 +37,7 @@
                     <tr>
                         <th>نام دکتر مربوطه</th>
                         <th>شماره تلفن دکتر مربوطه</th>
+                        <th>پرداخت شده</th>
                         <th>استفاده شده</th>
                         <th>تاریخ ثبت</th>
                         <th>دستورات</th>
@@ -57,6 +58,17 @@
                         </td>
                         <td>
                             {{appointment.doctor.phone_number}}
+                        </td>
+                        <td>
+                            {% if appointment.is_paid %}
+                            <p class="text-success">
+                                <i class="fa fa-check-square" aria-hidden="true"></i>
+                            </p>
+                            {% else %} 
+                            <p class="text-danger">
+                                <i class="fa fa-window-close" aria-hidden="true"></i>
+                            </p>
+                            {% endif %}
                         </td>
                         <td>
                             {% if appointment.used %}

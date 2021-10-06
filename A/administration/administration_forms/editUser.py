@@ -45,6 +45,12 @@ class EditUserForm(forms.Form):
         categories = forms.ModelMultipleChoiceField(queryset=SubCategory.objects.all(),widget=forms.SelectMultiple(attrs={"class":"form-control"}))
     except:
         categories = None
+
+    doctor_visit_cost = forms.IntegerField(required=False,label="",max_value=10000000,min_value=10000,error_messages={
+        "min_value":"مقدار قیمت ویزیت از حد مجاز کمتر است",
+        "max_value":"مقدار قیمت ویزیت از حد مجاز بیشتر است"
+    },widget=forms.NumberInput(attrs={"class":"form-control","placeholder":"قیمت ویزیت"}))
+
     doctor_shift = forms.CharField(max_length=200
     ,min_length=10,
     required=False,

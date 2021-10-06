@@ -65,6 +65,7 @@ class User(AbstractUser):
     objects = UserManager()
     age = models.PositiveSmallIntegerField(null=True,blank=True)
     profile_img = models.ImageField(null=True,blank=True)
+    doctor_visit_cost = models.PositiveIntegerField(null=True,blank=True)
     doctor_shift = models.CharField(max_length=120,null=True,blank=True)
     doctor_resume = models.TextField(max_length=3000,null=True,blank=True)
     categories = models.ManyToManyField(SubCategory,null=True,blank=True,related_name="users")
@@ -97,6 +98,7 @@ class User(AbstractUser):
 def get_till():
         return timezone.now() + datetime.timedelta(minutes=15)
 
+
 class UserLoginAttempt(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     user = models.ForeignKey(User,on_delete=models.CASCADE, related_name='login_attempts')
@@ -115,6 +117,7 @@ class UserAppointment(models.Model):
     doctor = models.ForeignKey(User,on_delete=models.CASCADE,related_name='doctor_appointments',null=True,blank=True)
     user = models.ForeignKey('User',on_delete=models.CASCADE,related_name='user_appointments',null=True,blank=True)
     used = models.BooleanField(default=False)
+    is_paid = models.BooleanField(default=False)
     is_removed = models.BooleanField(default=False)
     objects = MainManager()
     created_at = models.DateTimeField(auto_now_add=True)

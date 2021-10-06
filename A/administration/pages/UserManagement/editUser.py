@@ -23,6 +23,7 @@ class EditUser(View):
             'age':user.age,
             'doctor_shift':user.doctor_shift,
             'doctor_resume':user.doctor_resume,
+            'doctor_visit_cost':user.doctor_visit_cost,
             'roles':list(user.roles.values_list('id',flat=True)),
             'categories':list(user.categories.values_list('id',flat=True))
         }
@@ -67,6 +68,7 @@ class EditUser(View):
             user.profile_img = cd['profile_img'] if cd['profile_img'] else user.profile_img
             user.doctor_shift = cd['doctor_shift']
             user.doctor_resume = cd['doctor_resume']
+            user.doctor_visit_cost = cd['doctor_visit_cost']
             user.roles.set(cd['roles'])
             user.categories.set(cd['categories'])
             user.save()
