@@ -9,5 +9,9 @@ class AddRoleForm(forms.Form):
         'max_length':'تعداد حروف نام نقش بیشتر از حد مجاز است',
         'required':'لطفا نام نقش را وارد کنید'
     },widget=forms.TextInput({"placeholder":"نام نقش","class":"form-control"}))
-    permissions = forms.MultipleChoiceField(required=True,error_messages={"required":"لطفا حداقل یک دسترسی انتخاب کنید"},widget=forms.SelectMultiple(attrs={"class":"form-control"}),
-    choices=Permission.objects.all().values_list("id","permission_name"))
+    try:
+        # permissions = forms.MultipleChoiceField(required=True,error_messages={"required":"لطفا حداقل یک دسترسی انتخاب کنید"},widget=forms.SelectMultiple(attrs={"class":"form-control"}),
+        # choices=Permission.objects.all().values_list("id","permission_name"))
+        permissions = forms.ModelMultipleChoiceField(queryset=Permission.objects.all(),required=True,error_messages={"required":"لطفا حداقل یک دسترسی انتخاب کنید"},widget=forms.SelectMultiple(attrs={"class":"form-control"}))
+    except:
+        permissions = None

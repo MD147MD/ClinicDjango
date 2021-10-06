@@ -41,10 +41,10 @@ class Login(View):
                 user = User.objects.create(phone_number=phone_number)
             user_login_attempt = UserLoginAttempt.objects.create(user=user,code=code,ip=get_client_ip(request))
             data = serializers.serialize('json',[user_login_attempt], use_natural_foreign_keys=True, use_natural_primary_keys=True,indent=2)
-            async_to_sync(channel_layer.group_send)(
-                    'sms_logs',
-                    {"type": "append_data", "data": data}
-            )
+            # async_to_sync(channel_layer.group_send)(
+            #         'sms_logs',
+            #         {"type": "append_data", "data": data}
+            # )
             messages.success(request,"کد راستی آزمایی برای شما ارسال شد","warning")
             request.session["phone_number"] = phone_number
             return redirect("core:verify-phone")
@@ -70,10 +70,10 @@ class VerifyPhone(View):
                 user_attempt.used = True
                 user_attempt.save()
                 data = serializers.serialize('json',[user_attempt], use_natural_foreign_keys=True, use_natural_primary_keys=True,indent=2)
-                async_to_sync(channel_layer.group_send)(
-                        'sms_logs',
-                        {"type": "edit_data", "data": data}
-                )
+                # async_to_sync(channel_layer.group_send)(
+                #         'sms_logs',
+                #         {"type": "edit_data", "data": data}
+                # )
                 user = user_attempt.user
                 if user.is_blocked or not user:
                     request.session.pop("phone_number")

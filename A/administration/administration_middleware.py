@@ -34,7 +34,11 @@ secure_urls = [
     {'url':'remove-sub-category','permission_code':43},
     # ===========================================
     {'url':'sms-logs','permission_code':71},
-
+    # ===========================================
+    {'url':'blocked-ips','permission_code':80},
+    {'url':'add-blocked-ip','permission_code':81},
+    {'url':'remove-blocked-ip','permission_code':83},
+    # ===========================================
 ]
 
 

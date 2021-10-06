@@ -38,8 +38,12 @@ urlpatterns = [
     # ====================================
     path('sms-logs/',views.SmsLogs.as_view(),name="sms-logs"),    
     # ====================================
+    path('blocked-ips/',views.IpManagement.as_view(),name="ip-management"),    
+    path('add-blocked-ip/',views.AddBlockedIp.as_view(),name="add-blocked-ip"),    
+    path('remove-blocked-ip/<str:id>',views.RemoveBlockedIp.as_view(),name="remove-blocked-ip"),    
+    # ====================================
 ]
 
-websocket_urlpatterns = [
-        path('ws/logs/sms-logs/', consumers.DataConsumer.as_asgi()),
-]
+# websocket_urlpatterns = [
+#         path('ws/logs/sms-logs/', consumers.DataConsumer.as_asgi()),
+# ]

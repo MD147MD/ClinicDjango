@@ -46,7 +46,7 @@ INSTALLED_APPS = [
     # -- >
     # Third Party Apps < --
     'ckeditor',
-    'channels',
+    #'channels',
     # -- >
 ]
 
@@ -58,6 +58,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'A.middlewares.check_blocked_ip',
     'administration.administration_middleware.administration_middleware'
 ]
 
@@ -164,13 +165,13 @@ KAVENEGAR_KEY = "57684936322F675835516E55706D693365786A306256716E736A614172386D6
 # -- >
 
 # Configuring Channels < --
-ASGI_APPLICATION = "A.asgi.application"
-CHANNEL_LAYERS = {
-    'default': {
-        'BACKEND': 'channels_redis.core.RedisChannelLayer',
-        'CONFIG': {
-            "hosts": [('127.0.0.1', 6379)],
-        },
-    },
-}
+# ASGI_APPLICATION = "A.asgi.application"
+# CHANNEL_LAYERS = {
+#     'default': {
+#         'BACKEND': 'channels_redis.core.RedisChannelLayer',
+#         'CONFIG': {
+#             "hosts": [('127.0.0.1', 6379)],
+#         },
+#     },
+# }
 # -- >

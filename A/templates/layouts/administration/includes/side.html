@@ -17,11 +17,28 @@
       {% endif %}
       <ul class="sidebar-menu" data-widget="tree">
         <li class="header">منو</li>
+      {% if can_see_common or can_see_blocked_ips or can_add_blocked_ip %}
+        <li class="active treeview">
+          <a href="">
+            <i class="fa fa-database" aria-hidden="true"></i><span>عمومی</span>
+          </a>
+          <ul class="treeview-menu">
+            {% if can_see_blocked_ips %}
+              <li><a href="{% url 'administration:ip-management' %}"><i class="fa fa-circle-o"></i> دیدن آیپی های بلاک شده</a></li>
+            {% endif %}
+
+            {% if can_add_blocked_ip %}
+              <li><a href="{% url 'administration:add-blocked-ip' %}"><i class="fa fa-circle-o"></i> افزودن آیپی های بلاک شده</a></li>
+            {% endif %}
+          </ul>
+        </li>
+      {% endif %}
+
 
         {% if can_see_logs %}
           <li class="active treeview">
             <a href="">
-              <i class="fa fa-users"></i> <span>لاگ ها</span>
+              <i class="fa fa-terminal" aria-hidden="true"></i> <span>لاگ ها</span>
             </a>
             <ul class="treeview-menu">
               {% if can_see_sms_logs %}

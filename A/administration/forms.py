@@ -5,3 +5,4 @@ from .administration_forms.addCategory import AddCategoryForm
 from .administration_forms.addSubCategory import AddSubCategoryForm
 from .administration_forms.siteSettings import SiteSettingsForm
 from .administration_forms.addUserAppointment import AddUserAppointmentForm
+from .administration_forms.addBlockedIp import AddBlockedIpForm

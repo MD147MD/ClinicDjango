@@ -42,10 +42,17 @@ def administration_context_processor(request):
         edit_settings_permission_code = 2
         can_edit_site_settings = user.has_permission(edit_settings_permission_code)
         # --------------
-        see_sms_logs = 70
+        see_logs_permission_code = 70
         see_sms_logs_permission_code = 71   
         can_see_sms_logs = user.has_permission(see_sms_logs_permission_code)
-        can_see_logs = user.has_permission(see_sms_logs)
+        can_see_logs = user.has_permission(see_logs_permission_code)
+        # --------------
+        see_common_permission_code = 100
+        see_blocked_ips_permission_code = 80
+        add_blocked_ip_permission_code = 81
+        can_see_common = user.has_permission(see_common_permission_code)
+        can_see_blocked_ips = user.has_permission(see_blocked_ips_permission_code)
+        can_add_blocked_ip = user.has_permission(add_blocked_ip_permission_code)
         # --------------
         
 
@@ -60,5 +67,8 @@ def administration_context_processor(request):
         "can_add_picture":request.user.is_authenticated and can_add_picture,
         "can_edit_site_settings":request.user.is_authenticated and can_edit_site_settings,
         "can_see_sms_logs":request.user.is_authenticated and can_see_sms_logs,
-        "can_see_logs":request.user.is_authenticated and can_see_logs
+        "can_see_logs":request.user.is_authenticated and can_see_logs,
+        "can_see_blocked_ips":request.user.is_authenticated and can_see_blocked_ips,
+        "can_add_blocked_ip":request.user.is_authenticated and can_add_blocked_ip,
+        "can_see_common":request.user.is_authenticated and can_see_common,
     }

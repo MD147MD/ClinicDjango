@@ -9,7 +9,7 @@ from django.utils import timezone
 class Permission(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     permission_name = models.CharField(max_length=120)
-    permission_code = models.PositiveSmallIntegerField()
+    permission_code = models.PositiveSmallIntegerField(unique=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
@@ -122,3 +122,14 @@ class UserAppointment(models.Model):
     def __str__(self):
         return self.user.phone_number
 
+
+class BlockedIp(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    ip = models.CharField(max_length=120)
+    is_removed = models.BooleanField(default=False)
+    objects = MainManager()
+    created_at = models.DateTimeField(auto_now_add=True)
+
+
+    def __str__(self):
+        return self.ip

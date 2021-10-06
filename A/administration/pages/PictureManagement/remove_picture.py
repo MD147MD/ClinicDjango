@@ -14,6 +14,9 @@ class RemovePicture(View):
             picture = ClinicPicture.objects.get(pk=picture_id)
         except:
             return redirect("/404")
+        remove_picture_permission_code = 33
+        if not request.user.has_permission(remove_picture_permission_code):
+            return redirect("/404")
         picture.is_removed = True
         picture.save()
         messages.success(request,"عکس مورد نظر با موفقیت حذف شد","success")

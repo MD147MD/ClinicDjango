@@ -38,11 +38,11 @@ class AddUserAppointment(View):
         form = AddUserAppointmentForm(request.POST)
         if form.is_valid():
             cd = form.cleaned_data
-            doctor_id = cd["selected_doctor"]
-            doctor = User.objects.filter(id=doctor_id).first()
-            if not doctor:
-                return redirect("/404")
-            UserAppointment.objects.create(user=user,doctor=doctor)
+            # doctor_id = cd["selected_doctor"]
+            # doctor = User.objects.filter(id=doctor_id).first()
+            # if not doctor:
+            #     return redirect("/404")
+            UserAppointment.objects.create(user=user,doctor=cd['selected_doctor'])
             messages.success(request,"نوبت جدید با موفقیت اضافه شد","success")
             return redirect("administration:user-appointments",user.id)
         return render(request,"add-user-appointment/add-user-appointment.html",

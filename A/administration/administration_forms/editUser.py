@@ -5,6 +5,7 @@ import os
 
 
 class EditUserForm(forms.Form):
+    
     name = forms.CharField(max_length=30
     ,min_length=3,
     required=False,
@@ -38,10 +39,12 @@ class EditUserForm(forms.Form):
     ,widget=forms.NumberInput({'placeholder':'00','class':'form-control'}))
 
     profile_img = forms.ImageField(required=False,error_messages={'invalid':'لطفا بجز عکس چیز دیگری انتخاب نکنید'},widget=forms.FileInput(attrs={'style':'display:none','id':'profile_img'}))
-
-    categories = forms.MultipleChoiceField(required=False,widget=forms.SelectMultiple(attrs={"class":"form-control"}),
-    choices=SubCategory.objects.all().values_list("id","sub_category_name"))
-
+    try:
+        # categories = forms.MultipleChoiceField(required=False,widget=forms.SelectMultiple(attrs={"class":"form-control"}),
+        # choices=SubCategory.objects.all().values_list("id","sub_category_name"))
+        categories = forms.ModelMultipleChoiceField(queryset=SubCategory.objects.all(),widget=forms.SelectMultiple(attrs={"class":"form-control"}))
+    except:
+        categories = None
     doctor_shift = forms.CharField(max_length=200
     ,min_length=10,
     required=False,
@@ -55,9 +58,12 @@ class EditUserForm(forms.Form):
     error_messages={'max_length':'تعداد حروف رزومه دکتر بیشتر از حد مجاز است',
     'min_length':'تعداد حروف رزومه دکتر کمتر از حد مجاز است'}
     ,widget=forms.Textarea({'placeholder':'رزومه دکتر','class':'form-control','rows':5}))
-
-    roles = forms.MultipleChoiceField(required=False,widget=forms.CheckboxSelectMultiple(),choices=Role.objects.all().values_list('id','role_name'))
-
+    try:
+        # roles = forms.MultipleChoiceField(required=False,widget=forms.CheckboxSelectMultiple(),choices=Role.objects.all().values_list('id','role_name'))
+        roles = forms.ModelMultipleChoiceField(queryset=Role.objects.all(),widget=forms.CheckboxSelectMultiple())
+    except:
+        roles = None
+        
     def clean_phone_number(self):
         phone_number = self.cleaned_data["phone_number"]
         try:

@@ -30,4 +30,8 @@ from .pages.SiteSettings.edit_site_settings import EditSiteSettings
 # ========================================================
 from .pages.Logs.smsLogs import SmsLogs
 # ========================================================
+from .pages.Common.blocked_ips import IpManagement
+from .pages.Common.add_blocked_ip import AddBlockedIp
+from .pages.Common.remove_blocked_ip import RemoveBlockedIp
+# ========================================================
 

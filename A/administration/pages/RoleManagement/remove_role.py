@@ -14,6 +14,9 @@ class RemoveRole(View):
             role = Role.objects.get(pk=role_id)
         except:
             return redirect("/404")
+        remove_role_permission_code = 23
+        if not request.user.has_permission(remove_role_permission_code):
+            return redirect("/404")
         role.is_removed = True
         role.save()
         messages.success(request,"نقش مورد نظر با موفقیت حذف شد","success")
