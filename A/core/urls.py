@@ -1,5 +1,7 @@
 from django.urls import path
 from . import views
+from django.contrib.auth.decorators import login_required
+
 
 app_name = 'core'
 urlpatterns = [
@@ -11,5 +13,6 @@ urlpatterns = [
     path('doctors/',views.Doctors.as_view(),name='doctors'),
     path('contact-us/',views.ContactUs.as_view(),name='contact-us'),
     path('about-us/',views.AboutUs.as_view(),name='about-us'),
+    path('checkout/<str:doctor_id>',views.Checkout.as_view(),name='checkout'),
     path('',views.Home.as_view(),name='home')
 ]

@@ -84,8 +84,12 @@
                                     <i class="fa fa-info" aria-hidden="true"></i>
                                 </a>
                             {% endif %}
-
                             {% if can_see_user_appointments %}
+                                {% if user.is_doctor %}
+                                <a class="btn bg-purple" href="{% url 'administration:doctor-appointments' user.id %}" title="نوبت های دکتر">
+                                    <i class="fa fa-user-md" aria-hidden="true"></i>
+                                </a>
+                                {% endif %}
                                 <a class="btn btn-success" href="{% url 'administration:user-appointments' user.id %}" title="نوبت ها">
                                     <i class="fa fa-id-card" aria-hidden="true"></i>
                                 </a>

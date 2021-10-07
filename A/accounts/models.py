@@ -95,6 +95,11 @@ class User(AbstractUser):
     def is_staff(self):
         return self.is_admin
 
+    @property
+    def is_doctor(self):
+        doctor_permission_code = 50
+        return self.has_permission(doctor_permission_code)
+        
 def get_till():
         return timezone.now() + datetime.timedelta(minutes=15)
 

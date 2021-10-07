@@ -5,11 +5,11 @@ from django.contrib import messages
 from django.shortcuts import redirect
 
 
-class EditUserAppointment(View):
+class EditDoctorAppointment(View):
 
     def get(self,request,appointment_id,*args,**kwargs):
-        edit_user_appointment_permission_code = 17
-        if not request.user.has_permission(edit_user_appointment_permission_code):
+        edit_doctor_appointment_permission_code = 17
+        if not request.user.has_permission(edit_doctor_appointment_permission_code):
             return redirect("/404")
         user_appointment = None
         try:
@@ -20,4 +20,4 @@ class EditUserAppointment(View):
         user_appointment.used = not user_appointment.used
         user_appointment.save()
         messages.success(request,"نوبت مورد نظر با موفقیت ویرایش شد","info")
-        return redirect("administration:user-appointments",user_appointment.user.id)
+        return redirect("administration:doctor-appointments",user_appointment.doctor.id)

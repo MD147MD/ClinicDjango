@@ -1,0 +1,18 @@
+{% extends 'layouts/core/core_base.html'%}
+{% load humanize %}
+
+
+{% block content %}
+<div class="text-center">
+    <div class="card m-2">
+        <div class="card-body text-center">
+            <h2 class="card-title">پرداخت نوبت</h5>
+            <hr/>
+            <h4 class="card-text">دکتر : {{doctor.name}} {{doctor.family}}</h4>
+            <h5 href="#" class="card-link">قیمت : {{doctor.doctor_visit_cost|intcomma:False}} تومان</h5>
+            <hr/>
+            <a href="#" class="btn btn-warning">پرداخت</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

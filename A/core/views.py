@@ -181,6 +181,17 @@ class AboutUs(View):
         return redirect("/404")
 
 
+class Checkout(View):
+
+    def get(self,request,doctor_id,*args,**kwargs):
+        if not request.user.is_authenticated:
+            messages.error(request,"شما باید اول وارد حساب کاربری خود شوید","danger")
+            return redirect('core:login')
+        doctor = User.objects.filter(id=doctor_id).first()
+        if not doctor or doctor.doctor_visit_cost < 10000:
+            return redirect('/404')
+        return render(request,'checkout/checkout.html',{'doctor':doctor})
+
 def get_client_ip(request):
     x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
     if x_forwarded_for:

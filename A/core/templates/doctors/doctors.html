@@ -91,7 +91,7 @@
                                     <div class="text-end">
                                         <button class="btn btn-primary button" id="resume-btn" onclick="showModal('{{doctor.doctor_resume}}')">رزومه</button>
                                         <button class="btn btn-warning button" id="shift-btn" onclick="showModal('{{doctor.doctor_shift}}')">شیفت کاری</button>
-                                        <a href="" class="btn btn-success button">نوبت</a>
+                                        <a href="{% url 'core:checkout' doctor.id %}" class="btn btn-success button">نوبت</a>
                                     </div>
                                     </div>
                                 </div>
